@@ -1,0 +1,1 @@
+--algType benders --exprfile /home/hmedal/proj/wnj/exprFiles/razor-16/WnjInf_cor_jam-vars_arc-based_berkeley_index-1_commods-16_cLoc-rand_dem-rand02_jamLocs-49_commRg-0.17_infRange-0.29_multRadio-0_chan-1_jamB-1_jamRng-0.0834_hop-2.0__.xml
