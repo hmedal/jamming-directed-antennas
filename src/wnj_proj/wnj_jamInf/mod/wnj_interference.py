@@ -532,7 +532,7 @@ def solveFullMIP_DelayedRowGen_withCallbacks(G, JammingGraph, Paths, ISets, max_
         gurobiModel.optimize(new_PathAndIS_CutCallback)
     elif flowVarsType == 'arc-based' and modelType == 'cormican':
         if((interfModelType == 'simple-protocol') or (interfModelType == '802.11-MAC-protocol')):
-            gurobiModel.optimize(newISCutCallback) # use this one
+            gurobiModel.optimize(newISCutCallback) # use this one; this solve model (9) using callbacks with model (10) as the separation problem (newISCutCallback is the callback function)
         else:
             gurobiModel.optimize()
     elif flowVarsType == 'arc-based' and modelType == 'regular':
@@ -767,7 +767,7 @@ def getShortestPathEdgeWeights(capDualValues, edgesToIndexDict, edgeInterdictVal
 #         weights[e] = value
 #     return weights
 
-def addISetToModel(model, capDualValuesDict, edgesToIndexDict, usageDualValue, gap_for_ISetProb = 0.05):
+def addISetToModel(model, capDualValuesDict, edgesToIndexDict, usageDualValue, gap_for_ISetProb = 0.05): # this solves model (10) and adds a constraint to the master problem (model (9))
     global ISets
     nodeWeights = {}
     for edgeTriple in edgeTriples:
@@ -801,7 +801,7 @@ def addISetToModel(model, capDualValuesDict, edgesToIndexDict, usageDualValue, g
             model.cbLazy(expr)
             print "   add new cut for ISEt:", solnsSet[index], expr
             
-def newISCutCallback(model, where):
+def newISCutCallback(model, where): # this solves model (10) and adds a new constraint to model (9)
     global previous_mip_gap, bestBoundGlobal, bestObjGlobal, callbackCtr
     if where == gurobipy.GRB.callback.MIP:
         bestBoundGlobal = model.cbGet(gurobipy.GRB.callback.MIP_OBJBND)
@@ -835,7 +835,7 @@ def newISCutCallback(model, where):
                 capDualValuesDict[e] = capDualValues[count]
                 count += 1
             jamPlacedDict = createJamPlacedDicts(jamPlacedValues)
-            addISetToModel(model, capDualValuesDict, edgesToIndexDict, usageDualValue, gap_for_ISetProb) # look at this
+            addISetToModel(model, capDualValuesDict, edgesToIndexDict, usageDualValue, gap_for_ISetProb) # look at this; this solves model (10) 
             previous_mip_gap = mip_gap
             callbackCtr += 1
         except gurobipy.GurobiError as e:
@@ -2129,7 +2129,7 @@ def create_SingleLevelMIP_Regular_ArcBased(G, jammingGraph, commodities, ISets, 
     except gurobipy.GurobiError as e:
         print "create_SingleLevelMIP_Cormican_ArcBased", str(e)
         
-def create_SingleLevelMIP_Cormican_ArcBased(G, jammingGraph, commodities, ISets, interfModelType):
+def create_SingleLevelMIP_Cormican_ArcBased(G, jammingGraph, commodities, ISets, interfModelType): # creates model from equation (9)
     global gurobiModel, demForCommodDuals, capDuals, usageDual, edgeInterdict, jamPlaced, flowBalanceDuals
     numISets = len(ISets)
     gurobiModel = gurobipy.Model("SingleLevelMIP_Cormican_ArcBased")
