@@ -13,10 +13,10 @@ from scipy import stats
 import lxml.etree as etree
 import networkx as n
 import numpy as np
-from src.wnj_core.dat import wnj_dataset
-import src.wnj_core.myIO.databaseUtil as dbUtil
-from src.wnj_core.objects import executableModel
-from src.wnj_proj.wnj_jamInf.mod import wnj_model
+from wnj_core.dat import wnj_dataset
+import wnj_core.myIO.databaseUtil as dbUtil
+from wnj_core.objects import executableModel
+from wnj_proj.wnj_jamInf.mod import wnj_model
 
 
 try:
@@ -25,7 +25,7 @@ except:
     raise
 
 try:
-    from src.wnj_core.objects import wnj_problemInstance
+    from wnj_core.objects import wnj_problemInstance
 except:
     raise Exception("cannot import from src.wnj_core.objects import wnj_problemInstance")
 
