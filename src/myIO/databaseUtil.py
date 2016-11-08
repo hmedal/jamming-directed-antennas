@@ -154,7 +154,7 @@ def getStringsToCreateAllTables():
     print getBranchAndCutTableCreateString("BranchAndCut")
     
 if __name__ == '__main__':
-    databaseName = "/home/hmedal/Documents/2_msu/1_MSU_Projects/Papers/PAPER_JammingSpatialInterference/expr_output/wnj-results_local.db"
+    databaseName = "/C:/Users/wbl62/git/jamming-directed-antennas/wnj-results_wbl62_local.db"
     
     print getHeuristicResultsTableCreateString()
     #createAllTables(databaseName)

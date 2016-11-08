@@ -3006,7 +3006,8 @@ def runProtocolWithJamming_FullMIP_RowGenCallback():
     algParams = [algType]
     algOutput = [runTime, numNodesExplored, numMaxWtIndSetProbsSolved, lb, ub]
     solnOutput = [throughput]
-    dbUtil.printResultsToDB(databaseName, tableName, infrastructureInfo, modelInfo, dataSetInfo, instanceInfo, algParams, algOutput, solnOutput)
+    #dbUtil.printResultsToDB(databaseName, tableName, infrastructureInfo, modelInfo, dataSetInfo, instanceInfo, algParams, algOutput, solnOutput)
+    print databaseName, tableName, infrastructureInfo, modelInfo, dataSetInfo, instanceInfo, algParams, algOutput, solnOutput
     print "FINISHED"
     
 def runProtocolWithJamming_Benders():
