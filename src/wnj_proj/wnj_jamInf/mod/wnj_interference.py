@@ -236,6 +236,8 @@ def getJammersThatCanJamEdge(G, JammingGraph, edge, interfModelType):
             #print "isJammed", edge, jamLoc, isEdgeJammedByJammer_Protocol(G, edge, jamLoc, interfModelType)
             if(isEdgeJammedByJammer_Protocol(G, edge, jamLoc, interfModelType)):
                 jammersList.append(jamLoc)
+    print "jammerlist", jammersList
+    
     return jammersList
 
 def createJammingMasterProblem(G, JammingGraph, interfModelType):
@@ -514,6 +516,7 @@ def createSubProbMods():
     createThroughputModel_ContinuousJamming_Cormican(instance.CGraph, instance.commodities, ISets, [], interfModelType)
     
 def solveFullMIP_DelayedRowGen_withCallbacks(G, JammingGraph, Paths, ISets, max_hop_length, interfModelType, rel_mip_gap_tol = 0.0001):
+    #G is the connectivity graph
     print "solveFullMIP_DelayedRowGen_withCallbacks maxNumHops", max_hop_length
     createSubProbMods()
     if flowVarsType == 'path-based' and modelType == 'cormican':
@@ -1998,6 +2001,8 @@ def getCapDualsVars(G, useVirtualEdges = True):
     for edgeInfo in edgesToIterateOver:
         edgeTriple = (edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel'])
         capDuals[edgeTriple] = gurobiModel.addVar(0.0, name="capD_e"+str(edgeTriple))
+    print "capDuals", capDuals
+    
     return capDuals
 
 def getEdgeInterdictVars(G, jammingGraph, useVirtualEdges = False):
@@ -2014,10 +2019,15 @@ def getEdgeInterdictVars(G, jammingGraph, useVirtualEdges = False):
 def createFlowBalanceDuals(G, commodities):
     flowBalanceDuals = {}
     for commod in commodities.keys():
+        print str(commodities.keys())
         flowBalanceDuals[commod] = {}
         for node in G.nodes():
             #flowBalanceDuals[commod][node] = gurobiModel.addVar(-1, 1, name="flowBalD_i"+str(node)+",commod"+str(commod))
             flowBalanceDuals[commod][node] = gurobiModel.addVar(name="flowBalD_i"+str(node)+",commod"+str(commod))
+            print "node", str(node)
+            print "commod", str(commod)
+    print "flowBalanceDuals", flowBalanceDuals
+    
     return flowBalanceDuals
 
 def printFlowBalanceDualsValues():
@@ -2046,6 +2056,8 @@ def getRegularObjFn_FullMIP(G, useVirtualEdges = True):
 def getCormicanObjFn_FullMIP(G, interfModelType):
     #print "demand", instance.commodities[0]['demand']
     sumForDemMetDuals = sum([instance.commodities[commod]['demand'] * demForCommodDuals[commod] for commod in instance.commodities.keys()])
+    print "sumForDemMetDuals", sumForDemMetDuals
+    sys.exit()
     if((interfModelType == 'simple-protocol') or (interfModelType == '802.11-MAC-protocol')):
         return usageDual + sumForDemMetDuals
     else:
@@ -2136,12 +2148,15 @@ def create_SingleLevelMIP_Cormican_ArcBased(G, jammingGraph, commodities, ISets,
     try:
         # Create variables
         flowBalanceDuals = createFlowBalanceDuals(G, commodities) # alpha
+
         capDuals = getCapDualsVars(G) #beta
         usageDual = gurobiModel.addVar(0, name="usageD") #gamma
         demForCommodDuals = createDemandForCommodDuals() # psi_m
         if jamVarsType == 'jam-and-interdict-vars': # don't use this
             edgeInterdict = getEdgeInterdictVars(G, jammingGraph)
         jamPlaced = dict([(n, gurobiModel.addVar(vtype=gurobipy.GRB.BINARY, name="jamPlaced_l"+str(n))) for n in jammingGraph.nodes()])
+        print "jammingGraph.nodes()", jammingGraph.nodes()
+        
         gurobiModel.update() # Integrate new variables
         # Set objective
         gurobiModel.setObjective(getCormicanObjFn_FullMIP(G, interfModelType), gurobipy.GRB.MINIMIZE)
@@ -3156,16 +3171,24 @@ def getISetIndexForEdge(edge, ISets):
     
 def initializeSets():
     global Paths, ISets, edgeTriples, edgeTriplesInterdictable, g_capacityDuals
-    #print "initializeSets"
+    print "initializeSets"
+    
     Paths = {}
     for commod in instance.commodities.keys():
         Paths[commod] = []
     ISets = []
     edgeTriples = [(edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel']) for edgeInfo in instance.CGraph.edges(data = True)]
+    print "edgeTriples"
+    print edgeTriples
+    
     edgeTriplesInterdictable = [(edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel']) 
                                 for edgeInfo in instance.CGraph.edges(data = True) if edgeInfo[2]['edgeType'] == 'real']
+    
+    print "edgeTriplesInt"
+    print edgeTriplesInterdictable
+    
     g_capacityDuals = dict([(edge, 0.1) for edge in edgeTriples])
-    #print "g_capacityDuals", g_capacityDuals
+    print "g_capacityDuals", g_capacityDuals
     #print "edgeTriplesInterdictable", edgeTriplesInterdictable
     
 def resetSets():
@@ -3245,6 +3268,8 @@ def afterReadData():
     else:
         numRadiosPerNode = 1
     pathNumForCommod = dict([(commod, 0) for commod in instance.commodities.keys()])
+    print "pathnumforCommod", pathNumForCommod
+    
     jammersThatCanJamEdge = {}    
     for edgeInfo in instance.CGraph.edges(data = True):
         if jamVarsType == 'jam-vars':

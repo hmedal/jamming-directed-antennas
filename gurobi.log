@@ -827,3 +827,2536 @@ Thread count was 4 (of 4 available processors)
 
 Optimal solution found (tolerance 1.00e-04)
 Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Mon Jan  9 16:31:02 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.9999969
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 50 columns and 49 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 50 columns
+Presolve time: 0.01s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.01 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7198.4181149
+   Prev: 7199.9999969  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 50 columns and 74 nonzeros
+Coefficient statistics:
+  Matrix range    [3e-02, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 1e+00]
+Found heuristic solution: objective 0.24
+Presolve removed 2 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7198.38911486
+   Prev: 7198.4181149  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 50 columns and 90 nonzeros
+Coefficient statistics:
+  Matrix range    [3e-02, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 1e+00]
+Found heuristic solution: objective 0.24
+Presolve removed 3 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Wed Jan 11 07:47:55 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.99999619
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 50 columns and 49 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 50 columns
+Presolve time: 0.01s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.01 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7198.3915472
+   Prev: 7199.99999619  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 50 columns and 74 nonzeros
+Coefficient statistics:
+  Matrix range    [3e-02, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 1e+00]
+Found heuristic solution: objective 0.24
+Presolve removed 2 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7198.36621523
+   Prev: 7198.3915472  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 50 columns and 90 nonzeros
+Coefficient statistics:
+  Matrix range    [3e-02, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 1e+00]
+Found heuristic solution: objective 0.24
+Presolve removed 3 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 08:05:12 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.9999969
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 50 columns and 49 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 50 columns
+Presolve time: 0.01s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.01 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7198.3696239
+   Prev: 7199.9999969  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 50 columns and 74 nonzeros
+Coefficient statistics:
+  Matrix range    [3e-02, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 1e+00]
+Found heuristic solution: objective 0.24
+Presolve removed 2 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7198.33851385
+   Prev: 7198.3696239  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 50 columns and 90 nonzeros
+Coefficient statistics:
+  Matrix range    [3e-02, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 1e+00]
+Found heuristic solution: objective 0.24
+Presolve removed 3 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 15:52:28 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.9999969
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 50 columns and 49 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7198.41219091
+   Prev: 7199.9999969  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 50 columns and 74 nonzeros
+Coefficient statistics:
+  Matrix range    [3e-02, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 1e+00]
+Found heuristic solution: objective 0.24
+Presolve removed 2 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7198.38509703
+   Prev: 7198.41219091  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 50 columns and 90 nonzeros
+Coefficient statistics:
+  Matrix range    [3e-02, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 1e+00]
+Found heuristic solution: objective 0.24
+Presolve removed 3 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 16:07:55 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.9999969
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 50 columns and 49 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7198.434618
+   Prev: 7199.9999969  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 50 columns and 74 nonzeros
+Coefficient statistics:
+  Matrix range    [3e-02, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 1e+00]
+Found heuristic solution: objective 0.24
+Presolve removed 2 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7198.40163398
+   Prev: 7198.434618  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 50 columns and 90 nonzeros
+Coefficient statistics:
+  Matrix range    [3e-02, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 1e+00]
+Found heuristic solution: objective 0.24
+Presolve removed 3 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 16:31:08 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.99999595
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 50 columns and 49 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.20542812
+   Prev: 7199.99999595  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 50 columns and 71 nonzeros
+Coefficient statistics:
+  Matrix range    [3e-02, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [8e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 2 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7189.35165691
+   Prev: 7192.20542812  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 50 columns and 85 nonzeros
+Coefficient statistics:
+  Matrix range    [3e-02, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [7e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 3 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.413793103448e-01, best bound 2.413793103448e-01, gap 0.0%
+Changed value of parameter TimeLimit to 7189.03139901
+   Prev: 7189.35165691  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 4 rows, 50 columns and 100 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-04, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 1 rows and 46 columns
+Presolve time: 0.00s
+Presolved: 3 rows, 4 columns, 9 nonzeros
+
+Loaded MIP start with objective 0.5
+
+Variable types: 1 continuous, 3 integer (3 binary)
+Presolve removed 3 rows and 4 columns
+Presolve: All rows and columns removed
+
+Root relaxation: objective 2.586207e-01, 0 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       0.2586207    0.25862  0.00%     -    0s
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.586206896552e-01, best bound 2.586206896552e-01, gap 0.0%
+Changed value of parameter TimeLimit to 7187.78206301
+   Prev: 7189.03139901  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 5 rows, 50 columns and 126 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-04, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 0 rows and 45 columns
+Presolve time: 0.00s
+Presolved: 5 rows, 5 columns, 21 nonzeros
+
+Loaded MIP start with objective 0.541667
+
+Variable types: 1 continuous, 4 integer (4 binary)
+Presolve removed 5 rows and 5 columns
+Presolve: All rows and columns removed
+
+Root relaxation: objective 3.750000e-01, 0 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       0.3750000    0.37500  0.00%     -    0s
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.750000000000e-01, best bound 3.750000000000e-01, gap 0.0%
+Changed value of parameter TimeLimit to 7185.71490812
+   Prev: 7187.78206301  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 6 rows, 50 columns and 150 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-04, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 0 rows and 44 columns
+Presolve time: 0.00s
+Presolved: 6 rows, 6 columns, 31 nonzeros
+
+Loaded MIP start with objective 0.596591
+
+Variable types: 1 continuous, 5 integer (5 binary)
+Presolve removed 0 rows and 2 columns
+Presolved: 6 rows, 4 columns, 21 nonzeros
+
+
+Root relaxation: objective 4.980040e-01, 1 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       0.4980040    0.49800  0.00%     -    0s
+
+Explored 0 nodes (1 simplex iterations) in 0.00 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.980039920160e-01, best bound 4.980039920160e-01, gap 0.0%
+Changed value of parameter TimeLimit to 7185.33980298
+   Prev: 7185.71490812  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 7 rows, 50 columns and 159 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-04, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 0 rows and 43 columns
+Presolve time: 0.00s
+Presolved: 7 rows, 7 columns, 43 nonzeros
+
+Loaded MIP start with objective 0.6
+
+Variable types: 1 continuous, 6 integer (6 binary)
+Presolve removed 0 rows and 2 columns
+Presolved: 7 rows, 5 columns, 31 nonzeros
+
+
+Root relaxation: objective 4.986693e-01, 1 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       0.4986693    0.49867  0.00%     -    0s
+
+Explored 0 nodes (1 simplex iterations) in 0.00 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.986693280106e-01, best bound 4.986693280106e-01, gap 0.0%
+Changed value of parameter TimeLimit to 7184.50377393
+   Prev: 7185.33980298  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 8 rows, 50 columns and 169 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-04, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 0 rows and 43 columns
+Presolve time: 0.00s
+Presolved: 8 rows, 7 columns, 49 nonzeros
+
+Loaded MIP start with objective 0.75
+
+Variable types: 1 continuous, 6 integer (6 binary)
+Presolve removed 0 rows and 1 columns
+Presolved: 8 rows, 6 columns, 42 nonzeros
+
+
+Root relaxation: objective 5.000000e-01, 1 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       0.5000000    0.50000  0.00%     -    0s
+
+Explored 0 nodes (1 simplex iterations) in 0.00 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.000000000000e-01, best bound 5.000000000000e-01, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 17:02:35 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.99999619
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 50 columns and 49 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.75938606
+   Prev: 7199.99999619  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 50 columns and 94 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [8e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 2 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.34516001
+   Prev: 7192.75938606  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 50 columns and 138 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 3 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.14344096
+   Prev: 7192.34516001  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 4 rows, 50 columns and 169 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-04, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 4 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7191.97560406
+   Prev: 7192.14344096  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 5 rows, 50 columns and 189 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-04, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 5 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.500000000000e-01, best bound 2.500000000000e-01, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 17:03:58 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.99999595
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 50 columns and 49 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.45120811
+   Prev: 7199.99999595  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 50 columns and 94 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [8e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 2 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.05825996
+   Prev: 7192.45120811  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 50 columns and 138 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 3 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7191.85246491
+   Prev: 7192.05825996  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 4 rows, 50 columns and 171 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-04, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 4 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7191.67435312
+   Prev: 7191.85246491  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 5 rows, 50 columns and 191 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-04, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 5 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 17:05:16 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.9999969
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 17 columns and 16 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.53315496
+   Prev: 7199.9999969  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 17 columns and 31 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-01, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [8e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 2 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.23953199
+   Prev: 7192.53315496  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 17 columns and 41 nonzeros
+Coefficient statistics:
+  Matrix range    [4e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [6e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 3 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.01627612
+   Prev: 7192.23953199  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 4 rows, 17 columns and 45 nonzeros
+Coefficient statistics:
+  Matrix range    [4e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 4 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7191.71398211
+   Prev: 7192.01627612  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 5 rows, 17 columns and 53 nonzeros
+Coefficient statistics:
+  Matrix range    [4e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 5 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.500000000000e-01, best bound 2.500000000000e-01, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 17:08:17 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.99999714
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 17 columns and 16 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.67581511
+   Prev: 7199.99999714  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 17 columns and 31 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-01, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [8e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 2 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.35998511
+   Prev: 7192.67581511  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 17 columns and 41 nonzeros
+Coefficient statistics:
+  Matrix range    [4e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [6e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 3 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.14734221
+   Prev: 7192.35998511  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 4 rows, 17 columns and 46 nonzeros
+Coefficient statistics:
+  Matrix range    [4e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 4 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 17:09:25 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.99999714
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 26 columns and 25 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 26 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.72891307
+   Prev: 7199.99999714  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 26 columns and 48 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [8e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 2 rows and 26 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.43147898
+   Prev: 7192.72891307  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 26 columns and 55 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 3 rows and 26 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.11123109
+   Prev: 7192.43147898  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 4 rows, 26 columns and 74 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 4 rows and 26 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 17:11:34 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.99999595
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 50 columns and 49 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+00, 2e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.566962
+   Prev: 7199.99999595  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 50 columns and 94 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [8e-01, 2e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 2 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7191.60975194
+   Prev: 7192.566962  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 50 columns and 140 nonzeros
+Coefficient statistics:
+  Matrix range    [2e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 2e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 3 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7191.41600394
+   Prev: 7191.60975194  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 4 rows, 50 columns and 161 nonzeros
+Coefficient statistics:
+  Matrix range    [2e-04, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 2e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 4 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7191.21778893
+   Prev: 7191.41600394  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 5 rows, 50 columns and 175 nonzeros
+Coefficient statistics:
+  Matrix range    [2e-04, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 2e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 5 rows and 50 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 17:12:09 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.99999714
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 17 columns and 16 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+00, 2e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.54057312
+   Prev: 7199.99999714  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 17 columns and 31 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-01, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [8e-01, 2e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 2 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.18737698
+   Prev: 7192.54057312  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 17 columns and 35 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-01, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 2e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 3 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7191.92156696
+   Prev: 7192.18737698  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 4 rows, 17 columns and 45 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-01, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 2e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 4 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 17:12:49 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.9999969
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 17 columns and 16 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.68086195
+   Prev: 7199.9999969  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 17 columns and 31 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-01, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [8e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 2 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.37382483
+   Prev: 7192.68086195  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 17 columns and 41 nonzeros
+Coefficient statistics:
+  Matrix range    [4e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [6e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 3 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7192.16082382
+   Prev: 7192.37382483  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 4 rows, 17 columns and 45 nonzeros
+Coefficient statistics:
+  Matrix range    [4e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 4 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7191.86960292
+   Prev: 7192.16082382  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 5 rows, 17 columns and 53 nonzeros
+Coefficient statistics:
+  Matrix range    [4e-02, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e-01, 1e+00]
+Found heuristic solution: objective 0.827586
+Presolve removed 5 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.500000000000e-01, best bound 2.500000000000e-01, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 17:14:08 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.9999969
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 17 columns and 16 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7197.34734201
+   Prev: 7199.9999969  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 17 columns and 31 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 6e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+00]
+Found heuristic solution: objective 1.83333
+Presolve removed 2 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7196.72576904
+   Prev: 7197.34734201  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 17 columns and 44 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-01, 6e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+00]
+Found heuristic solution: objective 1.83333
+Presolve removed 3 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7196.17781687
+   Prev: 7196.72576904  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 4 rows, 17 columns and 57 nonzeros
+Coefficient statistics:
+  Matrix range    [4e-01, 6e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+00]
+Found heuristic solution: objective 1.83333
+Presolve removed 4 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7191.05201507
+   Prev: 7196.17781687  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 5 rows, 17 columns and 71 nonzeros
+Coefficient statistics:
+  Matrix range    [2e-01, 6e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+00]
+Found heuristic solution: objective 1.83333
+Presolve removed 5 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7190.67109799
+   Prev: 7191.05201507  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 6 rows, 17 columns and 84 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-04, 6e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+00]
+Found heuristic solution: objective 1.83333
+Presolve removed 6 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7190.37227201
+   Prev: 7190.67109799  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 7 rows, 17 columns and 100 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-04, 6e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 2e+00]
+Found heuristic solution: objective 1.83333
+Presolve removed 7 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7190.10772395
+   Prev: 7190.37227201  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 8 rows, 17 columns and 112 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-04, 6e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 2e+00]
+Found heuristic solution: objective 1.83333
+Presolve removed 8 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7189.80715203
+   Prev: 7190.10772395  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 9 rows, 17 columns and 127 nonzeros
+Coefficient statistics:
+  Matrix range    [7e-04, 7e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 2e+00]
+Found heuristic solution: objective 1.83333
+Presolve removed 4 rows and 12 columns
+Presolve time: 0.00s
+Presolved: 5 rows, 5 columns, 18 nonzeros
+
+Loaded MIP start with objective 0.5
+
+Variable types: 1 continuous, 4 integer (4 binary)
+Presolve removed 1 rows and 1 columns
+Presolved: 4 rows, 4 columns, 12 nonzeros
+
+
+Root relaxation: cutoff, 0 iterations, 0.00 seconds
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.000000000000e-01, best bound 5.000000000000e-01, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 17:14:59 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.9999969
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 17 columns and 16 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7196.75617981
+   Prev: 7199.9999969  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 17 columns and 28 nonzeros
+Coefficient statistics:
+  Matrix range    [2e-01, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 1
+Presolve removed 2 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.110223024625e-16, best bound 1.110223024625e-16, gap 0.0%
+Changed value of parameter TimeLimit to 7196.43511486
+   Prev: 7196.75617981  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 17 columns and 38 nonzeros
+Coefficient statistics:
+  Matrix range    [2e-01, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 1e+00]
+Found heuristic solution: objective 1
+Presolve removed 3 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7195.72805691
+   Prev: 7196.43511486  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 4 rows, 17 columns and 49 nonzeros
+Coefficient statistics:
+  Matrix range    [2e-01, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 1e+00]
+Found heuristic solution: objective 1
+Presolve removed 4 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7195.41805482
+   Prev: 7195.72805691  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 5 rows, 17 columns and 64 nonzeros
+Coefficient statistics:
+  Matrix range    [2e-01, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [5e-01, 1e+00]
+Found heuristic solution: objective 1
+Presolve removed 5 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7195.07005882
+   Prev: 7195.41805482  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 6 rows, 17 columns and 78 nonzeros
+Coefficient statistics:
+  Matrix range    [2e-01, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e-01, 1e+00]
+Found heuristic solution: objective 1
+Presolve removed 6 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7194.70441389
+   Prev: 7195.07005882  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 7 rows, 17 columns and 82 nonzeros
+Coefficient statistics:
+  Matrix range    [2e-01, 2e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e-01, 1e+00]
+Found heuristic solution: objective 1
+Presolve removed 3 rows and 13 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 4 columns, 10 nonzeros
+
+Loaded MIP start with objective 0.5
+
+Variable types: 0 continuous, 4 integer (3 binary)
+Presolve removed 4 rows and 4 columns
+Presolve: All rows and columns removed
+
+Root relaxation: objective 3.333333e-01, 0 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       0.3333333    0.33333  0.00%     -    0s
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.333333333333e-01, best bound 3.333333333333e-01, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 17:17:14 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.9999969
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 17 columns and 16 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7079.26694512
+   Prev: 7199.9999969  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 17 columns and 33 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 4e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+00]
+Found heuristic solution: objective 1.93182
+Presolve removed 2 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7071.87539291
+   Prev: 7079.26694512  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 17 columns and 49 nonzeros
+Coefficient statistics:
+  Matrix range    [9e-02, 4e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+00]
+Found heuristic solution: objective 1.93182
+Presolve removed 3 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7051.30209613
+   Prev: 7071.87539291  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 4 rows, 17 columns and 64 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-02, 4e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+00]
+Found heuristic solution: objective 1.93182
+Presolve removed 4 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7045.88965797
+   Prev: 7051.30209613  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 5 rows, 17 columns and 80 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-02, 4e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+00]
+Found heuristic solution: objective 1.93182
+Presolve removed 5 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7033.69312501
+   Prev: 7045.88965797  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 6 rows, 17 columns and 96 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-02, 4e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 2e+00]
+Found heuristic solution: objective 1.93182
+Presolve removed 6 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7029.4614079
+   Prev: 7033.69312501  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 7 rows, 17 columns and 111 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-02, 4e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [9e-01, 2e+00]
+Found heuristic solution: objective 1.93182
+Presolve removed 7 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7027.50611496
+   Prev: 7029.4614079  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 8 rows, 17 columns and 127 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-02, 4e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [9e-01, 2e+00]
+Found heuristic solution: objective 1.93182
+Presolve removed 8 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7025.73272014
+   Prev: 7027.50611496  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 9 rows, 17 columns and 143 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-02, 4e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [7e-01, 2e+00]
+Found heuristic solution: objective 1.93182
+Presolve removed 5 rows and 13 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 4 columns, 12 nonzeros
+
+Loaded MIP start with objective 0.727273
+
+Variable types: 1 continuous, 3 integer (3 binary)
+Presolve removed 4 rows and 4 columns
+Presolve: All rows and columns removed
+
+Root relaxation: objective 2.406239e-01, 0 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       0.2406239    0.24062  0.00%     -    0s
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.406239019017e-01, best bound 2.406239019017e-01, gap 0.0%
+Changed value of parameter TimeLimit to 7020.98974395
+   Prev: 7025.73272014  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 10 rows, 17 columns and 159 nonzeros
+Coefficient statistics:
+  Matrix range    [1e-02, 4e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [7e-01, 2e+00]
+Found heuristic solution: objective 1.93182
+Presolve removed 0 rows and 3 columns
+Presolve time: 0.00s
+Presolved: 10 rows, 14 columns, 130 nonzeros
+
+Loaded MIP start with objective 1.22727
+
+Variable types: 1 continuous, 13 integer (13 binary)
+Presolve removed 0 rows and 5 columns
+Presolved: 10 rows, 9 columns, 84 nonzeros
+
+
+Root relaxation: objective 7.272727e-01, 0 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       0.7272727    0.72727  0.00%     -    0s
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.272727272727e-01, best bound 7.272727272727e-01, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 17:21:25 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.9999969
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 17 columns and 16 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7169.47447395
+   Prev: 7199.9999969  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 17 columns and 33 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 8e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 4e+00]
+Found heuristic solution: objective 3.575
+Presolve removed 2 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7151.2990799
+   Prev: 7169.47447395  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 17 columns and 49 nonzeros
+Coefficient statistics:
+  Matrix range    [5e-01, 8e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 4e+00]
+Found heuristic solution: objective 3.575
+Presolve removed 3 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7143.84591389
+   Prev: 7151.2990799  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 4 rows, 17 columns and 65 nonzeros
+Coefficient statistics:
+  Matrix range    [5e-01, 8e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 4e+00]
+Found heuristic solution: objective 3.575
+Presolve removed 4 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7139.7701211
+   Prev: 7143.84591389  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 5 rows, 17 columns and 79 nonzeros
+Coefficient statistics:
+  Matrix range    [5e-01, 8e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 4e+00]
+Found heuristic solution: objective 3.575
+Presolve removed 5 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7130.691504
+   Prev: 7139.7701211  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 6 rows, 17 columns and 95 nonzeros
+Coefficient statistics:
+  Matrix range    [5e-01, 8e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 4e+00]
+Found heuristic solution: objective 3.575
+Presolve removed 6 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7129.06232595
+   Prev: 7130.691504  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 7 rows, 17 columns and 111 nonzeros
+Coefficient statistics:
+  Matrix range    [3e-01, 8e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 4e+00]
+Found heuristic solution: objective 3.575
+Presolve removed 7 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7126.76475096
+   Prev: 7129.06232595  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 8 rows, 17 columns and 128 nonzeros
+Coefficient statistics:
+  Matrix range    [5e-02, 8e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 4e+00]
+Found heuristic solution: objective 3.575
+Presolve removed 8 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7121.32460403
+   Prev: 7126.76475096  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 9 rows, 17 columns and 142 nonzeros
+Coefficient statistics:
+  Matrix range    [5e-02, 8e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 4e+00]
+Found heuristic solution: objective 3.575
+Presolve removed 9 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7119.03980708
+   Prev: 7121.32460403  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 10 rows, 17 columns and 158 nonzeros
+Coefficient statistics:
+  Matrix range    [5e-02, 8e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 4e+00]
+Found heuristic solution: objective 3.575
+Presolve removed 0 rows and 3 columns
+Presolve time: 0.00s
+Presolved: 10 rows, 14 columns, 127 nonzeros
+
+Loaded MIP start with objective 1.75
+
+Variable types: 1 continuous, 13 integer (13 binary)
+Presolve removed 2 rows and 9 columns
+Presolved: 8 rows, 5 columns, 36 nonzeros
+
+
+Root relaxation: objective 1.000000e+00, 0 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       1.0000000    1.00000  0.00%     -    0s
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.000000000000e+00, best bound 1.000000000000e+00, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 17:29:33 2017
+
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Changed value of parameter TimeLimit to 7199.99999595
+   Prev: 7200.0  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 1 rows, 17 columns and 16 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 0
+Presolve removed 1 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7049.40535903
+   Prev: 7199.99999595  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 2 rows, 17 columns and 33 nonzeros
+Coefficient statistics:
+  Matrix range    [2e-01, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Found heuristic solution: objective 1
+Presolve removed 2 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7032.6161201
+   Prev: 7049.40535903  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 3 rows, 17 columns and 48 nonzeros
+Coefficient statistics:
+  Matrix range    [2e-01, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [8e-01, 1e+00]
+Found heuristic solution: objective 1
+Presolve removed 3 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7029.22897315
+   Prev: 7032.6161201  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 4 rows, 17 columns and 63 nonzeros
+Coefficient statistics:
+  Matrix range    [5e-02, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e-01, 1e+00]
+Found heuristic solution: objective 1
+Presolve removed 4 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7025.23848605
+   Prev: 7029.22897315  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 5 rows, 17 columns and 75 nonzeros
+Coefficient statistics:
+  Matrix range    [5e-02, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e-01, 1e+00]
+Found heuristic solution: objective 1
+Presolve removed 5 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0%
+Changed value of parameter TimeLimit to 7021.4481771
+   Prev: 7025.23848605  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 6 rows, 17 columns and 83 nonzeros
+Coefficient statistics:
+  Matrix range    [8e-04, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e-01, 1e+00]
+Found heuristic solution: objective 1
+Presolve removed 6 rows and 17 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.474782716694e-01, best bound 3.474782716694e-01, gap 0.0%
+Changed value of parameter TimeLimit to 7011.72477007
+   Prev: 7021.4481771  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 7 rows, 17 columns and 99 nonzeros
+Coefficient statistics:
+  Matrix range    [8e-04, 1e+00]
+  Objective range [1e+00, 1e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e-01, 1e+00]
+Found heuristic solution: objective 1
+Presolve removed 3 rows and 13 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 4 columns, 12 nonzeros
+
+Loaded MIP start with objective 0.636364
+
+Variable types: 1 continuous, 3 integer (3 binary)
+Presolved: 4 rows, 4 columns, 12 nonzeros
+
+
+Root relaxation: objective 4.000000e-01, 0 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       0.4000000    0.40000  0.00%     -    0s
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.000000000000e-01, best bound 4.000000000000e-01, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 17:36:49 2017
+
+Changed value of parameter LazyConstraints to 1
+   Prev: 0  Min: 0  Max: 1  Default: 0
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 7531 rows, 2203 columns and 42362 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-01, 2e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 442 rows and 0 columns
+Presolve time: 0.03s
+Presolved: 7089 rows, 2203 columns, 41920 nonzeros
+Variable types: 2187 continuous, 16 integer (16 binary)
+Presolved: 7089 rows, 2203 columns, 41920 nonzeros
+
+
+Root relaxation: objective 0.000000e+00, 413 iterations, 0.03 seconds
+Total elapsed time = 5.83s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00000    0    3          -    0.00000      -     -    6s
+     0     0    0.00000    0    3          -    0.00000      -     -   11s
+     0     0    0.00000    0    7          -    0.00000      -     -   12s
+     0     0    0.02542    0    8          -    0.02542      -     -   12s
+     0     0    0.02542    0    8          -    0.02542      -     -   12s
+     0     0    0.05741    0    6          -    0.05741      -     -   13s
+     0     0    0.07886    0    6          -    0.07886      -     -   13s
+     0     0    0.09303    0    6          -    0.09303      -     -   13s
+     0     0    0.09303    0    6          -    0.09303      -     -   13s
+     0     0    0.09366    0    5          -    0.09366      -     -   13s
+     0     0    0.09366    0    5          -    0.09366      -     -   13s
+     0     0    0.09366    0    5          -    0.09366      -     -   14s
+     0     0    0.09366    0    5          -    0.09366      -     -   14s
+     0     0    0.09366    0    2          -    0.09366      -     -   14s
+     0     0    0.09366    0    2          -    0.09366      -     -   14s
+     0     0    0.09366    0    2          -    0.09366      -     -   14s
+     0     2    0.09366    0    2          -    0.09366      -     -   15s
+    12     1    0.31579    2    -          -    0.10940      -   363   20s
+    24     1    0.50000    2    -          -    0.10940      -   424   25s
+    38     2    0.58324    2    -          -    0.10940      -   430   30s
+    53     2    0.58328    2    -          -    0.13656      -   416   35s
+    67     3    0.41562    5    -          -    0.13656      -   487   40s
+    80     6    0.50000    3    -          -    0.13656      -   502   45s
+*   90     6               3       0.5000000    0.13656  72.7%   477   48s
+    97     0    0.45810    5    -    0.50000    0.34348  31.3%   505   50s
+   117     0    0.38888    4    -    0.50000    0.38888  22.2%   470   55s
+*  128     0               4       0.4000000    0.40000  0.00%   441   58s
+
+Cutting planes:
+  Gomory: 1
+  MIR: 7
+  Flow cover: 20
+  Lazy constraints: 138
+
+Explored 129 nodes (66436 simplex iterations) in 58.83 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.000000000000e-01, best bound 4.000000000000e-01, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Thu Jan 12 17:56:52 2017
+
+Changed value of parameter LazyConstraints to 1
+   Prev: 0  Min: 0  Max: 1  Default: 0
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 7531 rows, 2203 columns and 42362 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-01, 2e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 442 rows and 0 columns
+Presolve time: 0.04s
+Presolved: 7089 rows, 2203 columns, 41920 nonzeros
+Variable types: 2187 continuous, 16 integer (16 binary)
+Presolved: 7089 rows, 2203 columns, 41920 nonzeros
+
+
+Root relaxation: objective 0.000000e+00, 413 iterations, 0.03 seconds
+Total elapsed time = 6.01s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00000    0    3          -    0.00000      -     -    6s
+     0     0    0.00000    0    3          -    0.00000      -     -   11s
+     0     0    0.00000    0    7          -    0.00000      -     -   13s
+     0     0    0.02542    0    8          -    0.02542      -     -   13s
+     0     0    0.02542    0    8          -    0.02542      -     -   13s
+     0     0    0.05741    0    6          -    0.05741      -     -   13s
+     0     0    0.07886    0    6          -    0.07886      -     -   14s
+     0     0    0.09303    0    6          -    0.09303      -     -   14s
+     0     0    0.09303    0    6          -    0.09303      -     -   14s
+     0     0    0.09366    0    5          -    0.09366      -     -   14s
+     0     0    0.09366    0    5          -    0.09366      -     -   14s
+     0     0    0.09366    0    5          -    0.09366      -     -   14s
+     0     0    0.09366    0    5          -    0.09366      -     -   14s
+     0     0    0.09366    0    2          -    0.09366      -     -   15s
+     0     0    0.09366    0    2          -    0.09366      -     -   15s
+     0     0    0.09366    0    2          -    0.09366      -     -   15s
+     0     2    0.09366    0    2          -    0.09366      -     -   16s
+    11     2    0.31579    2    -          -    0.09676      -   389   20s
+    23     2    0.50000    2    -          -    0.10940      -   442   25s
+    37     2    0.58324    2    -          -    0.10940      -   425   30s
+    50     2    0.50000    3    -          -    0.13656      -   432   35s
+    66     6    0.50000    3    -          -    0.13656      -   483   40s
+    78     4    0.50000    1    -          -    0.13656      -   501   45s
+*   90     6               3       0.5000000    0.13656  72.7%   477   48s
+    91     0    0.44959    5    -    0.50000    0.13656  72.7%   475   50s
+   116     0    0.37799    4    -    0.50000    0.37799  24.4%   472   55s
+*  128     0               4       0.4000000    0.40000  0.00%   441   59s
+
+Cutting planes:
+  Gomory: 1
+  MIR: 7
+  Flow cover: 20
+  Lazy constraints: 138
+
+Explored 129 nodes (66436 simplex iterations) in 59.32 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.000000000000e-01, best bound 4.000000000000e-01, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 00:04:32 2017
+
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 00:04:33 2017
+
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 00:06:14 2017
+
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 00:07:34 2017
+
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 00:09:38 2017
+
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 00:11:17 2017
+
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 00:16:52 2017
+
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 00:18:00 2017
+
+Changed value of parameter LazyConstraints to 1
+   Prev: 0  Min: 0  Max: 1  Default: 0
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 7531 rows, 2203 columns and 42362 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-01, 2e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 442 rows and 0 columns
+Presolve time: 0.05s
+Presolved: 7089 rows, 2203 columns, 41920 nonzeros
+Variable types: 2187 continuous, 16 integer (16 binary)
+Presolved: 7089 rows, 2203 columns, 41920 nonzeros
+
+
+Root relaxation: objective 0.000000e+00, 413 iterations, 0.04 seconds
+Total elapsed time = 5.98s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00000    0    3          -    0.00000      -     -    6s
+     0     0    0.00000    0    3          -    0.00000      -     -   11s
+     0     0    0.00000    0    7          -    0.00000      -     -   12s
+     0     0    0.02542    0    8          -    0.02542      -     -   13s
+     0     0    0.02542    0    8          -    0.02542      -     -   13s
+     0     0    0.05741    0    6          -    0.05741      -     -   13s
+     0     0    0.07886    0    6          -    0.07886      -     -   13s
+     0     0    0.09303    0    6          -    0.09303      -     -   13s
+     0     0    0.09303    0    6          -    0.09303      -     -   14s
+     0     0    0.09366    0    5          -    0.09366      -     -   14s
+     0     0    0.09366    0    5          -    0.09366      -     -   14s
+     0     0    0.09366    0    5          -    0.09366      -     -   14s
+     0     0    0.09366    0    5          -    0.09366      -     -   14s
+     0     0    0.09366    0    2          -    0.09366      -     -   14s
+     0     0    0.09366    0    2          -    0.09366      -     -   15s
+     0     0    0.09366    0    2          -    0.09366      -     -   15s
+     0     2    0.09366    0    2          -    0.09366      -     -   15s
+    12     1    0.31579    2    -          -    0.10940      -   363   20s
+    24     1    0.50000    2    -          -    0.10940      -   424   25s
+    38     2    0.58324    2    -          -    0.10940      -   430   30s
+    51     2    0.58328    2    -          -    0.13656      -   430   35s
+    67     3    0.41562    5    -          -    0.13656      -   487   40s
+    79     5    0.58329    2    -          -    0.13656      -   505   45s
+*   90     6               3       0.5000000    0.13656  72.7%   477   48s
+    91     0    0.44959    5    -    0.50000    0.13656  72.7%   475   50s
+   116     0    0.37799    4    -    0.50000    0.37799  24.4%   472   55s
+*  128     0               4       0.4000000    0.40000  0.00%   441   59s
+
+Cutting planes:
+  Gomory: 1
+  MIR: 7
+  Flow cover: 20
+  Lazy constraints: 138
+
+Explored 129 nodes (66436 simplex iterations) in 59.66 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.000000000000e-01, best bound 4.000000000000e-01, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 11:08:40 2017
+
+Changed value of parameter LazyConstraints to 1
+   Prev: 0  Min: 0  Max: 1  Default: 0
+Parameter MIPGap unchanged
+   Value: 0.0001  Min: 0.0  Max: 1e+100  Default: 0.0001
+Changed value of parameter Threads to 4
+   Prev: 0  Min: 0  Max: 1024  Default: 0
+Changed value of parameter MIPFocus to 2
+   Prev: 0  Min: 0  Max: 3  Default: 0
+Changed value of parameter TimeLimit to 7200.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 7531 rows, 2203 columns and 42362 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-01, 2e+00]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+00, 1e+00]
+Presolve removed 442 rows and 0 columns
+Presolve time: 0.03s
+Presolved: 7089 rows, 2203 columns, 41920 nonzeros
+Variable types: 2187 continuous, 16 integer (16 binary)
+Presolved: 7089 rows, 2203 columns, 41920 nonzeros
+
+
+Root relaxation: objective 0.000000e+00, 413 iterations, 0.03 seconds
+Total elapsed time = 5.82s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00000    0    3          -    0.00000      -     -    6s
+     0     0    0.00000    0    3          -    0.00000      -     -   11s
+     0     0    0.00000    0    7          -    0.00000      -     -   12s
+     0     0    0.02542    0    8          -    0.02542      -     -   13s
+     0     0    0.02542    0    8          -    0.02542      -     -   13s
+     0     0    0.05741    0    6          -    0.05741      -     -   13s
+     0     0    0.07886    0    6          -    0.07886      -     -   13s
+     0     0    0.09303    0    6          -    0.09303      -     -   13s
+     0     0    0.09303    0    6          -    0.09303      -     -   13s
+     0     0    0.09366    0    5          -    0.09366      -     -   13s
+     0     0    0.09366    0    5          -    0.09366      -     -   14s
+     0     0    0.09366    0    5          -    0.09366      -     -   14s
+     0     0    0.09366    0    5          -    0.09366      -     -   14s
+     0     0    0.09366    0    2          -    0.09366      -     -   14s
+     0     0    0.09366    0    2          -    0.09366      -     -   14s
+     0     0    0.09366    0    2          -    0.09366      -     -   15s
+     0     2    0.09366    0    2          -    0.09366      -     -   15s
+    12     1    0.31579    2    -          -    0.10940      -   363   20s
+    24     1    0.50000    2    -          -    0.10940      -   424   25s
+    38     2    0.58324    2    -          -    0.10940      -   430   30s
+    53     2    0.58328    2    -          -    0.13656      -   416   35s
+    68     4    0.50000    1    -          -    0.13656      -   484   40s
+    81     2    0.43886    5    -          -    0.13656      -   501   45s
+*   90     6               3       0.5000000    0.13656  72.7%   477   47s
+   100     0    0.46402    5    -    0.50000    0.34902  30.2%   504   50s
+   119     0    0.39286    4    -    0.50000    0.39286  21.4%   467   55s
+*  128     0               4       0.4000000    0.40000  0.00%   441   58s
+
+Cutting planes:
+  Gomory: 1
+  MIR: 7
+  Flow cover: 20
+  Lazy constraints: 138
+
+Explored 129 nodes (66436 simplex iterations) in 58.24 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.000000000000e-01, best bound 4.000000000000e-01, gap 0.0%
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 12:10:39 2017
+
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 12:13:17 2017
+
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 12:28:50 2017
+
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 12:38:20 2017
+
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 12:39:33 2017
+
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 12:40:05 2017
+
+
+Gurobi 6.5.2 (mac64) logging started Fri Jan 13 13:00:54 2017
+
