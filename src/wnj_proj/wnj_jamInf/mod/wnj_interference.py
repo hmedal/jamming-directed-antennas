@@ -1295,7 +1295,7 @@ def modifyAndSolve_maxWtIndepSet(ConflictGraph, nodeWeights, interfModelType, it
             constrAdded.append(maxWtIndSetModel.addConstr(sum([inSet[node] for node in setToExclude]) <= len(setToExclude) - 1, "cutoff"))
         maxWtIndSetModel.update()
         maxWtIndSetModel.Params.MIPGap = rel_mip_gap_tol
-        maxWtIndSetModel.optimize()
+        maxWtIndSetModel.optimize() # this is telling Gurobi to solve it
         if(writeToFile):
             maxWtIndSetModel.write("/tmp/maxWtIndepSet_"+str(iteration) +".lp")
         solnCount = maxWtIndSetModel.SolCount
