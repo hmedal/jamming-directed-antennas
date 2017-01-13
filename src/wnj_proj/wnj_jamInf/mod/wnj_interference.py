@@ -145,7 +145,7 @@ includeKnapsack = False
 includeSuperValid = False
 includeParetoOptimalBendersCuts = False
 includeTrustRegion = False
-
+#Note
 def getPathFromEdgeList(edgeList, origin, destination):
     path = []
     currentNode = origin
