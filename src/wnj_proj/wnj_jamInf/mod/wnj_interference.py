@@ -40,6 +40,7 @@ shortestPathModels = {}
 
 pos = None
 #commodities = {}
+print "pathNum"
 pathNumForCommod = {}
 interfModelType = None
 
