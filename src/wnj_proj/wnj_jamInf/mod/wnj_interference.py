@@ -236,7 +236,7 @@ def getJammersThatCanJamEdge(G, JammingGraph, edge, interfModelType):
             #print "isJammed", edge, jamLoc, isEdgeJammedByJammer_Protocol(G, edge, jamLoc, interfModelType)
             if(isEdgeJammedByJammer_Protocol(G, edge, jamLoc, interfModelType)):
                 jammersList.append(jamLoc)
-    print "jammerlist", jammersList
+    #print "jammerlist", jammersList
     
     return jammersList
 
@@ -793,7 +793,7 @@ def addISetToModel(model, capDualValuesDict, edgesToIndexDict, usageDualValue, g
     print "Solve to optimality"
     maxWeights, solnsSet = modifyAndSolve_maxWtIndepSet(instance.interferenceGraph, nodeWeights, interfModelType, callbackCtr, gap_for_ISetProb) # changes beta values and resolves (10)
     #print "node weights: ", [(edgeTriple, capDualValuesDict[edgeTriple]) for edgeTriple in edgeTriples if capDualValuesDict[edgeTriple] > FUZZ]
-    print "CALLBACK (add ISet): maxWt", maxWeights, "usageDual", usageDualValue
+    print "CALLBACK (add ISet):" #maxWt", maxWeights, "usageDual", usageDualValue
     threshold = 1.0 * maxWeights[0] #only the best are added
     numberAllowedToAdd = 1
     for index in range(len(maxWeights)): # adds new independent sets back to (9)
@@ -802,7 +802,7 @@ def addISetToModel(model, capDualValuesDict, edgesToIndexDict, usageDualValue, g
             attrIndex = getAttrIndex(edgeTriple)
             expr = sum([-instance.CGraph.edge[e[0]][e[1]][attrIndex]['capacity'] * model._capDuals[edgesToIndexDict[e]] for e in solnsSet[index]]) + model._usageDual >= 0
             model.cbLazy(expr)
-            print "   add new cut for ISEt:", solnsSet[index], expr
+            #print "   add new cut for ISEt:", solnsSet[index], expr
             
 def newISCutCallback(model, where): # this solves model (10) and adds a new constraint to model (9)
     global previous_mip_gap, bestBoundGlobal, bestObjGlobal, callbackCtr
@@ -2057,7 +2057,6 @@ def getCormicanObjFn_FullMIP(G, interfModelType):
     #print "demand", instance.commodities[0]['demand']
     sumForDemMetDuals = sum([instance.commodities[commod]['demand'] * demForCommodDuals[commod] for commod in instance.commodities.keys()])
     print "sumForDemMetDuals", sumForDemMetDuals
-    sys.exit()
     if((interfModelType == 'simple-protocol') or (interfModelType == '802.11-MAC-protocol')):
         return usageDual + sumForDemMetDuals
     else:
@@ -3178,17 +3177,17 @@ def initializeSets():
         Paths[commod] = []
     ISets = []
     edgeTriples = [(edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel']) for edgeInfo in instance.CGraph.edges(data = True)]
-    print "edgeTriples"
-    print edgeTriples
+    #print "edgeTriples"
+    #print edgeTriples
     
     edgeTriplesInterdictable = [(edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel']) 
                                 for edgeInfo in instance.CGraph.edges(data = True) if edgeInfo[2]['edgeType'] == 'real']
     
-    print "edgeTriplesInt"
-    print edgeTriplesInterdictable
+    #print "edgeTriplesInt"
+    #print edgeTriplesInterdictable
     
     g_capacityDuals = dict([(edge, 0.1) for edge in edgeTriples])
-    print "g_capacityDuals", g_capacityDuals
+    #print "g_capacityDuals", g_capacityDuals
     #print "edgeTriplesInterdictable", edgeTriplesInterdictable
     
 def resetSets():

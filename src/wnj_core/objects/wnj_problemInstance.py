@@ -35,6 +35,9 @@ class Instance(object):
     interferenceGraph = None
     jamGraph = None
     #stuff from dataset
+    tcurr = 0
+    trec = 0
+    battCap = 0
     ids = None
     numNodes = 0
     coors = None
@@ -49,7 +52,10 @@ class Instance(object):
         self.ids = dataset.ids
         self.coors = dataset.coors
         self.numNodes = dataset.numNodes
-        self.commodities = dataset.commodities        
+        self.commodities = dataset.commodities   
+        self.tcurr = dataset.tcurr
+        self.trec = dataset.trec
+        self.battCap = dataset.battCap     
         self.myDataset = dataset
         #instance parameters
         self.readInExperimentData(path)
@@ -96,7 +102,9 @@ class Instance(object):
         print "nodeOnlyGraph has ", len(dataset.nodeOnlyGraph.nodes()), "nodes and ", len(dataset.nodeOnlyGraph.edges()), "edges"
         self.nodeOnlyGraphWithAttr = dataset.nodeOnlyGraph.copy()
         for i in self.nodeOnlyGraphWithAttr.nodes():
-            self.nodeOnlyGraphWithAttr.node[i]['power']= 1.0
+            self.nodeOnlyGraphWithAttr.node[i]['tcurr']= self.tcurr
+            self.nodeOnlyGraphWithAttr.node[i]['trec']= self.trec
+            self.nodeOnlyGraphWithAttr.node[i]['battCap']= self.battCap
             self.nodeOnlyGraphWithAttr.node[i]['commRange']= self.commRange
             self.nodeOnlyGraphWithAttr.node[i]['interferenceRange']= self.infRange
         print "nodes", self.nodeOnlyGraphWithAttr.nodes(data = True)
@@ -130,7 +138,7 @@ class Instance(object):
         #print "numRadiosPerNode", numRadiosPerNode
         for radioTypeIndex in range(numRadiosPerNode):
             for n in sorted(self.nodeOnlyGraphWithAttr.nodes()):
-                self.graphFinal.add_node((n, radioTypeIndex), power = self.nodeOnlyGraphWithAttr.node[n]['power'], 
+                self.graphFinal.add_node((n, radioTypeIndex), tcurr = self.nodeOnlyGraphWithAttr.node[n]['tcurr'], trec = self.nodeOnlyGraphWithAttr.node[n]['trec'], battCap = self.nodeOnlyGraphWithAttr.node[n]['battCap'],  
                                          commRange = self.nodeOnlyGraphWithAttr.node[n]['commRange'], 
                                                coor = self.nodeOnlyGraphWithAttr.node[n]['coor'], 
                              interferenceRange = self.nodeOnlyGraphWithAttr.node[n]['interferenceRange'], radioType = radioTypeIndex, index = counter)
@@ -181,7 +189,7 @@ class Instance(object):
             if isinstance(i, int):
                 self.CGraph.add_node(i, type = 'super', interferenceRange = 0.0, commRange = float('inf'), coor = self.graphFinal.node[i]['coor'])
             else:
-                self.CGraph.add_node(i, power = self.graphFinal.node[i]['power'], commRange = self.graphFinal.node[i]['commRange'], 
+                self.CGraph.add_node(i, tcurr = self.graphFinal.node[i]['tcurr'], trec = self.graphFinal.node[i]['trec'], battCap = self.graphFinal.node[i]['battCap'], commRange = self.graphFinal.node[i]['commRange'], 
                         interferenceRange = self.graphFinal.node[i]['interferenceRange'], 
                         radioType = self.graphFinal.node[i]['radioType'], coor = self.graphFinal.node[i]['coor'])
         for edge in sorted(self.graphFinal.edges(data = True)):
@@ -244,6 +252,7 @@ class Instance(object):
         #        return True
         
     def createConflictGraph_Protocol(self, G, interfModelType):
+        #NOTE: THIS IS WHERE EDGES BECOME NODES IN THE INTERFERENCE GRAPH
         #print "createConflictGraph_Protocol", G.edges(data=True)
         interferenceGraph = nx.DiGraph()
         #print "reading", len(G.edges()), "edges"

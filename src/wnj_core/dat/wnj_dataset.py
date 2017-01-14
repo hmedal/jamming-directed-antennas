@@ -44,13 +44,18 @@ class Wnj_Dataset(object):
         self.numNodes = len(self.ids)
         self.coors = [ast.literal_eval(i) for i in d.xpath('//node/coor[1]/text()')]
         self.distToClosest = [ast.literal_eval(i) for i in d.xpath('//node/distToClosest[1]/text()')]
+        self.tcurr = [int(i) for i in d.xpath('//node/tcurr[1]/text()')]
+        #print "distToClosest", self.distToClosest
+        #sys.exit()
+        self.trec = [ast.literal_eval(i) for i in d.xpath('//node/trec[1]/text()')]
+        self.battCap = [ast.literal_eval(i) for i in d.xpath('//node/battCap[1]/text()')]
         coorsTuples = [(i[0], i[1]) for i in self.coors]
         #print "coors", self.coors
         #print "coorsTuples", coorsTuples
         self.commodities = {}
         self.nodeOnlyGraph = nx.Graph()
         for index in range(len(self.ids)):
-            self.nodeOnlyGraph.add_node(self.ids[index], coor = coorsTuples[index], distToClosest = self.distToClosest[index])
+            self.nodeOnlyGraph.add_node(self.ids[index], coor = coorsTuples[index], distToClosest = self.distToClosest[index], tcurr = self.tcurr[index], trec = self.trec[index], battCap = self.battCap[index])
         for commod in d.xpath('//odPair'):
             id = int(commod.xpath('./id/text()')[0])
             self.commodities[id] = {}
