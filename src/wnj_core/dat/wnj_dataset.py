@@ -51,7 +51,8 @@ class Wnj_Dataset(object):
         self.battCap = [ast.literal_eval(i) for i in d.xpath('//node/battCap[1]/text()')]
         coorsTuples = [(i[0], i[1]) for i in self.coors]
         #print "coors", self.coors
-        #print "coorsTuples", coorsTuples
+        print "coorsTuples", coorsTuples
+        #test comment
         self.commodities = {}
         self.nodeOnlyGraph = nx.Graph()
         for index in range(len(self.ids)):
