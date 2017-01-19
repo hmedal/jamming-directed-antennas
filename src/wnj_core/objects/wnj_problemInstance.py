@@ -33,6 +33,7 @@ class Instance(object):
     graphFinal = None
     CGraph = None
     interferenceGraph = None
+    interferenceGraph_nodesOnly = None
     jamGraph = None
     #stuff from dataset
     tcurr = 0
@@ -102,9 +103,9 @@ class Instance(object):
         print "nodeOnlyGraph has ", len(dataset.nodeOnlyGraph.nodes()), "nodes and ", len(dataset.nodeOnlyGraph.edges()), "edges"
         self.nodeOnlyGraphWithAttr = dataset.nodeOnlyGraph.copy()
         for i in self.nodeOnlyGraphWithAttr.nodes():
-            self.nodeOnlyGraphWithAttr.node[i]['tcurr']= self.tcurr
-            self.nodeOnlyGraphWithAttr.node[i]['trec']= self.trec
-            self.nodeOnlyGraphWithAttr.node[i]['battCap']= self.battCap
+            #self.nodeOnlyGraphWithAttr.node[i]['tcurr']= self.tcurr
+            #self.nodeOnlyGraphWithAttr.node[i]['trec']= self.trec
+            #self.nodeOnlyGraphWithAttr.node[i]['battCap']= self.battCap
             self.nodeOnlyGraphWithAttr.node[i]['commRange']= self.commRange
             self.nodeOnlyGraphWithAttr.node[i]['interferenceRange']= self.infRange
         print "nodes", self.nodeOnlyGraphWithAttr.nodes(data = True)
@@ -143,13 +144,13 @@ class Instance(object):
                                                coor = self.nodeOnlyGraphWithAttr.node[n]['coor'], 
                              interferenceRange = self.nodeOnlyGraphWithAttr.node[n]['interferenceRange'], radioType = radioTypeIndex, index = counter)
                 counter += 1
-                self.graphFinal.add_node((n), coor = self.nodeOnlyGraphWithAttr.node[n]['coor'], index = counter)#add super node
+                self.graphFinal.add_node((n), coor = self.nodeOnlyGraphWithAttr.node[n]['coor'], tcurr = self.nodeOnlyGraphWithAttr.node[n]['tcurr'], trec = self.nodeOnlyGraphWithAttr.node[n]['trec'], battCap = self.nodeOnlyGraphWithAttr.node[n]['battCap'], index = counter)#add super node
                 self.graphFinal.add_edge((n), (n, radioTypeIndex), radioTypeIndex, edgeType = 'virtual')
                 #posNodeOnlyGraphEnhanced[(n, radioTypeIndex)] = posG[n]
                 #posNodeOnlyGraphEnhanced[(n)] = posG[n]
                 counter += 1
         for n in sorted(self.nodeOnlyGraphWithAttr.nodes()):
-            self.graphFinal.add_node((n), coor = self.nodeOnlyGraphWithAttr.node[n]['coor'], interferenceRange = 0.0, commRange = float('inf'))#add super node
+            self.graphFinal.add_node((n), coor = self.nodeOnlyGraphWithAttr.node[n]['coor'], tcurr = self.nodeOnlyGraphWithAttr.node[n]['tcurr'], trec = self.nodeOnlyGraphWithAttr.node[n]['trec'], battCap = self.nodeOnlyGraphWithAttr.node[n]['battCap'], interferenceRange = 0.0, commRange = float('inf'))#add super node
             #posNodeOnlyGraphEnhanced[(n)] = posG[n]
             for radioTypeIndex in range(numRadiosPerNode):
                 self.graphFinal.add_edge((n), (n, radioTypeIndex), radioTypeIndex, dist = 0.0, radioType = radioTypeIndex, 
@@ -187,7 +188,7 @@ class Instance(object):
         for i in self.graphFinal.nodes():
             #print "node", i, originalGraph.node[i]
             if isinstance(i, int):
-                self.CGraph.add_node(i, type = 'super', interferenceRange = 0.0, commRange = float('inf'), coor = self.graphFinal.node[i]['coor'])
+                self.CGraph.add_node(i, type = 'super', interferenceRange = 0.0, commRange = float('inf'), coor = self.graphFinal.node[i]['coor'], tcurr = self.nodeOnlyGraphWithAttr.node[i]['tcurr'], trec = self.nodeOnlyGraphWithAttr.node[i]['trec'], battCap = self.nodeOnlyGraphWithAttr.node[i]['battCap'])
             else:
                 self.CGraph.add_node(i, tcurr = self.graphFinal.node[i]['tcurr'], trec = self.graphFinal.node[i]['trec'], battCap = self.graphFinal.node[i]['battCap'], commRange = self.graphFinal.node[i]['commRange'], 
                         interferenceRange = self.graphFinal.node[i]['interferenceRange'], 
@@ -254,9 +255,12 @@ class Instance(object):
     def createConflictGraph_Protocol(self, G, interfModelType):
         #NOTE: THIS IS WHERE EDGES BECOME NODES IN THE INTERFERENCE GRAPH
         #print "createConflictGraph_Protocol", G.edges(data=True)
+        global interferenceGraph_nodesOnly
         interferenceGraph = nx.DiGraph()
+        interferenceGraph_nodesOnly = nx.DiGraph()
         #print "reading", len(G.edges()), "edges"
         for edgeInfo1 in G.edges(data = True):
+            interferenceGraph_nodesOnly.add_node(edgeInfo1[0])
             for edgeInfo2 in G.edges(data = True):
                 #print edgeInfo1, edgeInfo2
                 if(edgeInfo1 != edgeInfo2):
@@ -265,18 +269,20 @@ class Instance(object):
                         edge2 = (edgeInfo2[0], edgeInfo2[1], edgeInfo2[2]['channel'])
                         #print "add:", edgeInfo1[0], edgeInfo1[1], edgeInfo1[2]['radioType'], edgeInfo1[2]['channel'], "***", edgeInfo2[0], edgeInfo2[1], edgeInfo2[2]['radioType'], edgeInfo2[2]['channel']
                         interferenceGraph.add_edge(edge1, edge2)
+                        
                     #else:
                         #print "don't add:", edgeInfo1[0], edgeInfo1[1], edgeInfo1[2]['radioType'], edgeInfo1[2]['channel'], "***", edgeInfo2[0], edgeInfo2[1], edgeInfo2[2]['radioType'], edgeInfo2[2]['channel']
         #nx.draw(ConflictGraph)
         #plt.show() # display
         for edgeInfo in G.edges(data = True):
-            #print "edgeInfo", edgeInfo
+            print "edgeInfo", edgeInfo
             if edgeInfo[2]['edgeType'] == 'virtual':
                 interferenceGraph.add_node((edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel']))
-        #for node in interferenceGraph.nodes(data = True):
-        #    print "infGraph node", node
+        for node in interferenceGraph.nodes(data = True):
+            print "infGraph node", interferenceGraph.nodes()
         #for edge in interferenceGraph.edges(data = True):
         #    print "infGraph edge", edge
+    
         return interferenceGraph
     
     def createConflictGraph_PhysicalModel(self, G, interfModelType):

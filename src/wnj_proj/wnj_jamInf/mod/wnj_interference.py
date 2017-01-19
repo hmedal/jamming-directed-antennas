@@ -18,6 +18,9 @@ from wnj_core.dat import wnj_dataset
 import wnj_core.myIO.databaseUtil as dbUtil
 from wnj_core.objects import executableModel
 from wnj_proj.wnj_jamInf.mod import wnj_model
+#from wnj_proj.wn_th_phys.mod.wnj_th_physInf import edgesToIndexDict
+#from _pytest.python import Instance
+#from _pytest.main import Node
 
 
 try:
@@ -61,6 +64,8 @@ jamPlaced = None
 jamPlacedLP = None
 flowVars = None
 inSet = None
+Z0 = None
+Z1 = None
 iSetUsage = None
 findPathflowVars = None
 returnFlow = None
@@ -83,6 +88,8 @@ Paths = {}
 ISets = []
 edgeTriples = []
 edgeTriplesInterdictable = []
+nodesInterdictable = []
+nodesRealVirtual = []
 jammersThatCanJamEdge = {}
 edgesToIndexInterdictDict = {}
 nodesToIndexInterdictDict = {}
@@ -459,7 +466,7 @@ def getInitialNodeWeights():
     return initialNodeWeights
 
 def setVars(modelType, useVirtualEdges = True):
-    gurobiModel._usageDual = usageDual
+    #gurobiModel._usageDual = usageDual
     if useVirtualEdges:
         edgeSetToIterateOver = edgeTriples
     else:
@@ -467,6 +474,7 @@ def setVars(modelType, useVirtualEdges = True):
     gurobiModel._capDuals = [capDuals[triple] for triple in edgeSetToIterateOver]
     gurobiModel._jamPlaced = [jamPlaced[node] for node in instance.jamGraph.nodes()]
     gurobiModel._demForCommodDuals = [demForCommodDuals[commod] for commod in instance.commodities.keys()]
+    gurobiModel._usageDual = [usageDual[nodes] for nodes in nodesRealVirtual]
     if modelType == 'regular':
         gurobiModel._jamUBDual = []
         for edgeInfo in instance.CGraph.edges(data = True):
@@ -772,7 +780,7 @@ def getShortestPathEdgeWeights(capDualValues, edgesToIndexDict, edgeInterdictVal
 #         weights[e] = value
 #     return weights
 
-def addISetToModel(model, capDualValuesDict, edgesToIndexDict, usageDualValue, gap_for_ISetProb = 0.05): # this solves model (10) and adds a constraint to the master problem (model (9))
+def addISetToModel(model, capDualValuesDict, edgesToIndexDict, usageDualValuesDict, gap_for_ISetProb = 0.05): # this solves model (10) and adds a constraint to the master problem (model (9))
     global ISets
     nodeWeights = {}
     for edgeTriple in edgeTriples:
@@ -799,11 +807,17 @@ def addISetToModel(model, capDualValuesDict, edgesToIndexDict, usageDualValue, g
     threshold = 1.0 * maxWeights[0] #only the best are added
     numberAllowedToAdd = 1
     for index in range(len(maxWeights)): # adds new independent sets back to (9)
-        if maxWeights[index] >= max(usageDualValue, threshold) and index < numberAllowedToAdd :
+        if maxWeights[index] >= max(usageDualValuesDict[index], threshold) and index < numberAllowedToAdd :
+            print "usageDualIndex",usageDualValuesDict[index]
             ISets.append(solnsSet[index])
             attrIndex = getAttrIndex(edgeTriple)
-            expr = sum([-instance.CGraph.edge[e[0]][e[1]][attrIndex]['capacity'] * model._capDuals[edgesToIndexDict[e]] for e in solnsSet[index]]) + model._usageDual >= 0
-            model.cbLazy(expr)
+            expr = (sum([-instance.CGraph.edge[e[0]][e[1]][attrIndex]['capacity'] * model._capDuals[edgesToIndexDict[e]] for e in solnsSet[index]]) + sum([instance.CGraph.node[e[0]]['tcurr']*model._usageDual[edgesToIndexDict[e]] for e in solnsSet[index]]) >= 0)
+            #print "TESTISCALLBACK", -instance.CGraph.edge[e[0]][e[1]][attrIndex]['capacity'] * model._capDuals[edgesToIndexDict[e]]
+            #print "TCURRENTCALLBACK", instance.CGraph.node[e[0]]['tcurr']*model._usageDual[edgesToIndexDict[e]]
+            #print "solnsetindex", solnsSet[index]
+            print "MODEL SOLVED"
+            #model.cbLazy(expr)
+            
             #print "   add new cut for ISEt:", solnsSet[index], expr
             
 def newISCutCallback(model, where): # this solves model (10) and adds a new constraint to model (9)
@@ -830,17 +844,28 @@ def newISCutCallback(model, where): # this solves model (10) and adds a new cons
                 gap_for_ISetProb = 0.10
             usageDualValue = model.cbGetSolution(model._usageDual)
             capDualValues = model.cbGetSolution(model._capDuals)
+            print "CAPDUALVALUES", capDualValues
+            print "USAGEDUAL VALUES", usageDualValue
             if jamVarsType == 'jam-and-interdict-vars':
                 edgeInterdictValues = model.cbGetSolution(model._edgeInterdict)
                 edgeInterdictsDict = createEdgeInterdictDict(edgeInterdictValues)
             jamPlacedValues = model.cbGetSolution(model._jamPlaced)
             capDualValuesDict = {}
+            usageDualValuesDict = {}
             count = 0
+            
             for e in edgeTriples:
                 capDualValuesDict[e] = capDualValues[count]
                 count += 1
+                #print "capDict", capDualValuesDict[e]
+            countnode = 0
+            for n in nodesRealVirtual:
+                usageDualValuesDict[n] = usageDualValue[countnode]
+                countnode +=1
+                #print "usageDict", usageDualValuesDict[n]
+                
             jamPlacedDict = createJamPlacedDicts(jamPlacedValues)
-            addISetToModel(model, capDualValuesDict, edgesToIndexDict, usageDualValue, gap_for_ISetProb) # look at this; this solves model (10) 
+            addISetToModel(model, capDualValuesDict, edgesToIndexDict, usageDualValuesDict, gap_for_ISetProb) # look at this; this solves model (10) 
             previous_mip_gap = mip_gap
             callbackCtr += 1
         except gurobipy.GurobiError as e:
@@ -1207,20 +1232,30 @@ def getConstraintExpressionForBendersCut_JamAndEdgeInterdictVars(JammingGraph, f
     #return 0 <= approxVarArg
 
 def create_MaxWtIndepSet_Model(ConflictGraph, nodeWeights, interfModelType):
-    global maxWtIndSetModel, inSet
+    global maxWtIndSetModel, inSet, Z0, Z1
     print "create_MaxWtIndepSet_Model", interfModelType
+    
     maxWtIndSetModel = gurobipy.Model("max wt indep set")
     try:
         # Create variables
         inSet = dict([(node, maxWtIndSetModel.addVar(0, 1, vtype = gurobipy.GRB.BINARY, name="x_"+str(node))) 
                       for node in ConflictGraph.nodes()])
+        Z0 = dict([(nodez[0], maxWtIndSetModel.addVar(0, 1, vtype = gurobipy.GRB.BINARY, name="z_"+str(nodez[0])))
+                for nodez in ConflictGraph.nodes()])
+        Z1 = dict([(nodez[1], maxWtIndSetModel.addVar(0, 1, vtype = gurobipy.GRB.BINARY, name="z_"+str(nodez[1])))
+                for nodez in ConflictGraph.nodes()])
+        print "inSet", inSet
         maxWtIndSetModel.update() # Integrate new variables
-        # Set objective
-        maxWtIndSetModel.setObjective(sum([nodeWeights[node] * inSet[node] for node in ConflictGraph.nodes()]), gurobipy.GRB.MAXIMIZE)
+        # Set objective - Added NEW for total current
+        maxWtIndSetModel.setObjective(sum([nodeWeights[node] * inSet[node] for node in ConflictGraph.nodes()]) - sum([instance.CGraph.node[nodeZ[1]]['tcurr']*Z1[nodeZ[1]] for nodeZ in ConflictGraph.nodes()]), gurobipy.GRB.MAXIMIZE)
         # adjacency constraints
         if(interfModelType == 'simple-protocol' or interfModelType == '802.11-MAC-protocol'):
             [maxWtIndSetModel.addConstr( inSet[node] + inSet[adjNode] <= 1, "adjConstr_"+str(node)+","+str(adjNode))
              for node in ConflictGraph.nodes() for adjNode in ConflictGraph.neighbors(node) if adjNode != node]
+            [maxWtIndSetModel.addConstr(inSet[node] <= Z0[node[0]], "inSet_Z_Constr_"+str(node)+","+str(node))
+             for node in ConflictGraph.nodes()]#10d new constraint
+            [maxWtIndSetModel.addConstr(inSet[node] <= Z1[node[1]], "inSet_Z_Constr_"+str(node)+","+str(node))
+             for node in ConflictGraph.nodes()]#10e new constraint
         elif(interfModelType == 'simple-physical'):
             M = 100000
             [maxWtIndSetModel.addConstr(sum([ConflictGraph.edge[node][otherNode]['weight'] * inSet[otherNode] for otherNode in ConflictGraph.nodes() 
@@ -1234,7 +1269,15 @@ def create_MaxWtIndepSet_Model(ConflictGraph, nodeWeights, interfModelType):
             maxWtIndSetModel.write("/tmp/maxWtIndepSet_initial.lp")
     except gurobipy.GurobiError as e:
         print "maxWt error: ", str(e)
-
+    #maxWtIndSetModel.setObjective((sum([nodeWeights[node] * inSet[node] for node in ConflictGraph.nodes()]) - sum([instance.CGraph.node[nodeZ[1]]['tcurr']*Z[nodeZ[1]] for nodeZ in ConflictGraph.nodes()])), gurobipy.GRB.MAXIMIZE)
+    for nodeZ in ConflictGraph.nodes():
+        print instance.CGraph.nodes(data=True)
+        print nodeZ[0]
+        print "nodez",instance.CGraph.node[nodeZ[0]]['tcurr']*Z0[nodeZ[0]]
+       
+    for node in ConflictGraph.nodes():
+        print "node", nodeWeights[node] * inSet[node] 
+    #sys.exit()
 def getNodeToRoundUp(node0, node1, fracSoln, nodeWeights, roundingHeuristic):
     #print "getNodeToRoundUp", node0, node1
     if roundingHeuristic == 'random':
@@ -2007,6 +2050,13 @@ def getCapDualsVars(G, useVirtualEdges = True):
     
     return capDuals
 
+def getUsageDualsVars(G):
+    #usageDual = {}
+    #for nodes in nodesRealVirtual:
+     #   usageDual[nodes] = gurobiModel.addVar(0.0, name="usageD_"+str(nodes))
+    #print "usageDual", usageDual
+    return dict([(nodes, gurobiModel.addVar(0.0, name="usage_D"+str(nodes))) for nodes in G.nodes()])
+
 def getEdgeInterdictVars(G, jammingGraph, useVirtualEdges = False):
     edgeInterdict = {}
     if useVirtualEdges:
@@ -2056,11 +2106,15 @@ def getRegularObjFn_FullMIP(G, useVirtualEdges = True):
     return objSum
 
 def getCormicanObjFn_FullMIP(G, interfModelType):
-    #print "demand", instance.commodities[0]['demand']
+    print "demand", instance.commodities[0]['demand']*demForCommodDuals[0]
+    print "usage", G.node[(33,0)]['battCap']*usageDual[0]
+    print "commod_keys", instance.commodities.keys()
     sumForDemMetDuals = sum([instance.commodities[commod]['demand'] * demForCommodDuals[commod] for commod in instance.commodities.keys()])
+    sumForUsageDuals = sum([G.node[nodes]['battCap']*usageDual[nodes] for nodes in G.nodes()])
     print "sumForDemMetDuals", sumForDemMetDuals
+    print "sumForUsageDuals", sumForUsageDuals
     if((interfModelType == 'simple-protocol') or (interfModelType == '802.11-MAC-protocol')):
-        return usageDual + sumForDemMetDuals
+        return sumForUsageDuals + sumForDemMetDuals
     else:
         sumForCapDuals = 0
         for edgeInfo in G.edges(data = True):
@@ -2069,7 +2123,7 @@ def getCormicanObjFn_FullMIP(G, interfModelType):
             sumForCapDuals += G.edge[edgeTriple[0]][edgeTriple[1]][attrIndex]['capacity'] * capDuals[edgeTriple]
         sumForDemMetDuals = sum([instance.commodities[commod]['demand'] * demForCommodDuals[commod] for commod in instance.commodities.keys()])
         return sumForCapDuals + sumForDemMetDuals
-
+    
 def getJamPlacedUBDualVar(G):
     jamPlacedUBDual = {}
     for edgeInfo in G.edges(data = True):
@@ -2090,16 +2144,19 @@ def getJamUBDual(G):
 
 def create_BottleneckConstraints(G, numISets):
     isetUsageVarsAsDual = []
-    for m in range(numISets):
-        firstSum = 0
-        for edgeInfo in G.edges(data = True):
-            edgeTriple = (edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel'])
-            attrIndex = getAttrIndex(edgeTriple)
-            if edgeTriple in ISets[m]:
-                firstSum += -G.edge[edgeTriple[0]][edgeTriple[1]][attrIndex]['capacity'] * capDuals[edgeTriple]
-        isetUsageVarsAsDual.append(gurobiModel.addConstr(firstSum + usageDual >= 0.0, "bottleneck_"+str(m)))
+    #for m in range(numISets):
+    firstSum = 0
+    for edgeInfo in G.edges(data = True):
+        edgeTriple = (edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel'])
+        attrIndex = getAttrIndex(edgeTriple)
+     #       if edgeTriple in ISets[m]:
+        firstSum += (-G.edge[edgeTriple[0]][edgeTriple[1]][attrIndex]['capacity'] * capDuals[edgeTriple]) + (G.node[edgeTriple[0]]['tcurr']*usageDual[edgeTriple[0]])
+        print "edgeTriple[0]",edgeTriple[0]
+    isetUsageVarsAsDual.append(gurobiModel.addConstr(firstSum >= 0.0, "bottleneck_"+str(edgeInfo)))
+    print "ISSSSSSSEEEETS" ,ISets
+    #sys.exit()
     return isetUsageVarsAsDual
-
+    
 def createCapDualsUBConstraints(G):
     for edgeInfo in G.edges(data = True):
         edgeTriple = (edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel'])
@@ -2151,7 +2208,7 @@ def create_SingleLevelMIP_Cormican_ArcBased(G, jammingGraph, commodities, ISets,
         flowBalanceDuals = createFlowBalanceDuals(G, commodities) # alpha
 
         capDuals = getCapDualsVars(G) #beta
-        usageDual = gurobiModel.addVar(0, name="usageD") #gamma
+        usageDual = getUsageDualsVars(G)#gurobiModel.addVar(0, name="usageD") #gamma
         demForCommodDuals = createDemandForCommodDuals() # psi_m
         if jamVarsType == 'jam-and-interdict-vars': # don't use this
             edgeInterdict = getEdgeInterdictVars(G, jammingGraph)
@@ -3006,7 +3063,8 @@ def runProtocolWithJamming_FullMIP_RowGenCallback():
 #             print "   pathInfo", sumOfWts + totalInterdicts, totalInterdicts, "      ", path
 #             print "      ", [(n, jamPlaced[n].X) for n in getNodesThatCanInterdictEdgeSet(path)]
 #             print "      ", [(e, capDuals[e].X) for e in path if capDuals[e].X > FUZZ]
-    print "throughput", throughput
+    #print "throughput", throughput
+    print "total data transmitted:", throughput
     numSolutionsFound = gurobiModel.SolCount
     numNodesExplored = gurobiModel.NodeCount
     print "numSolutionsFound", numSolutionsFound
@@ -3171,7 +3229,7 @@ def getISetIndexForEdge(edge, ISets):
             counter += 1
     
 def initializeSets():
-    global Paths, ISets, edgeTriples, edgeTriplesInterdictable, g_capacityDuals
+    global Paths, ISets, edgeTriples, edgeTriplesInterdictable, g_capacityDuals, nodesInterdictable, nodesRealVirtual
     print "initializeSets"
     
     Paths = {}
@@ -3181,12 +3239,29 @@ def initializeSets():
     edgeTriples = [(edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel']) for edgeInfo in instance.CGraph.edges(data = True)]
     #print "edgeTriples"
     #print edgeTriples
+    for edgeInfo in instance.CGraph.edges(data=True):
+            nodesRealVirtual.append(edgeInfo[0])
+            nodesRealVirtual.append(edgeInfo[1])
+            print "edgeinfo0", edgeInfo[0]
+            print "edgeinfo1", edgeInfo[1]
+    print "nodesRealVirtual", nodesRealVirtual[0]
+    
     
     edgeTriplesInterdictable = [(edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel']) 
                                 for edgeInfo in instance.CGraph.edges(data = True) if edgeInfo[2]['edgeType'] == 'real']
+                               
     
-    #print "edgeTriplesInt"
-    #print edgeTriplesInterdictable
+    print "edgeTriplesInt"
+    print edgeTriplesInterdictable
+   
+    for edgeInfo in instance.CGraph.edges(data=True):
+        if edgeInfo[2]['edgeType'] == 'real':
+            nodesInterdictable.append(edgeInfo[0])
+            nodesInterdictable.append(edgeInfo[1])
+            print "edgeinfo0", edgeInfo[0]
+            print "edgeinfo1", edgeInfo[1]
+    print "nodesInterdicatble", nodesInterdictable[0]        
+            
     
     g_capacityDuals = dict([(edge, 0.1) for edge in edgeTriples])
     #print "g_capacityDuals", g_capacityDuals
