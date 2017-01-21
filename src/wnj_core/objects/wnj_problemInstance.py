@@ -10,8 +10,10 @@ import itertools
 import ast
 import networkx as nx
 import math
+import csv
 
 FUZZ = 0.0001
+
 
 class Instance(object):
     '''
@@ -43,6 +45,8 @@ class Instance(object):
     numNodes = 0
     coors = None
     commodities = {}
+    transmissiondistance = 0
+    
     
     def __init__(self, path, dataset):
         '''
@@ -71,12 +75,12 @@ class Instance(object):
         print "jamming graph created"
         
     def readInExperimentData(self, path):
-        global numJamLocs, commRange, infRange, multRadiosPerNode, numChannels, jamBudget, jamRange # instance params
+        global numJamLocs, commRange, infRange, multRadiosPerNode, numChannels, jamBudget, jamRange, infRangeMult # instance params
         d = etree.parse(open(path))
         self.numJamLocs = float(d.xpath('//instance/numJamLocs[1]/text()')[0])
         self.commRange = float(d.xpath('//instance/commRange[1]/text()')[0])
-        self.infRange = float(d.xpath('//instance/infRange[1]/text()')[0])
-        #print "boolTest", bool('F')
+        self.infRangeMult = float(d.xpath('//instance/infRangeMult[1]/text()')[0])
+        self.infRange = self.commRange * self.infRangeMult#print "boolTest", bool('F')
         #print "multRadiosStr", d.xpath('//instance/multRadiosPerNode[1]/text()')[0], bool(str(d.xpath('//instance/multRadiosPerNode[1]/text()')[0]))
         self.multRadiosPerNode = bool(int(d.xpath('//instance/multRadiosPerNode[1]/text()')[0]))
         self.numChannels = int(d.xpath('//instance/numChannels[1]/text()')[0])
@@ -110,22 +114,24 @@ class Instance(object):
             self.nodeOnlyGraphWithAttr.node[i]['interferenceRange']= self.infRange
         print "nodes", self.nodeOnlyGraphWithAttr.nodes(data = True)
         counter = 0
-        for headNode in self.nodeOnlyGraphWithAttr.nodes():
-            for tailNode in self.nodeOnlyGraphWithAttr.nodes():
-                coor1 = self.nodeOnlyGraphWithAttr.node[headNode]['coor']
-                coor2 = self.nodeOnlyGraphWithAttr.node[tailNode]['coor']
+#         for headNode in self.nodeOnlyGraphWithAttr.nodes():
+#             print "headnode", headNode
+#             for tailNode in self.nodeOnlyGraphWithAttr.nodes():
+#                  print "tailnode", tailnode
+#                  coor1 = self.nodeOnlyGraphWithAttr.node[headNode]['coor']
+#                  coor2 = self.nodeOnlyGraphWithAttr.node[tailNode]['coor']
                 #print "coors", np.array(coor1), np.array(coor2)
                 #print "coorsDiff", np.array(coor1) - np.array(coor2)
                 #distCalc = np.linalg.norm(np.array(self.nodeOnlyGraphWithAttr.node[headNode]['coor']) - 
                 #                      np.array(self.nodeOnlyGraphWithAttr.node[tailNode]['coor']))
-                distCalc = self.euclidDist(coor1, coor2)
+                #distCalc = self.euclidDist(coor1, coor2)
                 #print "test", headNode, tailNode, coor1, coor2, distCalc, self.nodeOnlyGraphWithAttr.node[headNode]['commRange'], self.interfModelType
-                if((self.interfModelType == 'simple-protocol') or (self.interfModelType == '802.11-MAC-protocol') or (self.interfModelType == 'none')):
-                    #print "possibly add edge", headNode != tailNode, distCalc <= (self.nodeOnlyGraphWithAttr.node[headNode]['commRange'] + FUZZ)
-                    if(headNode != tailNode and distCalc <= (self.nodeOnlyGraphWithAttr.node[headNode]['commRange'] + FUZZ)):
-                        #print "add edge"
-                        self.nodeOnlyGraphWithAttr.add_edge(headNode, tailNode, dist = distCalc, number = counter, capacity = self.linkCap)
-                        counter += 1
+#                 if((self.interfModelType == 'simple-protocol') or (self.interfModelType == '802.11-MAC-protocol') or (self.interfModelType == 'none')):
+#                     #print "possibly add edge", headNode != tailNode, distCalc <= (self.nodeOnlyGraphWithAttr.node[headNode]['commRange'] + FUZZ)
+#                     if(headNode != tailNode and distCalc <= (self.nodeOnlyGraphWithAttr.node[headNode]['commRange'] + FUZZ)):
+#                         #print "add edge"
+#                         self.nodeOnlyGraphWithAttr.add_edge(headNode, tailNode, dist = distCalc, number = counter, capacity = self.linkCap)
+#                         counter += 1
         #print "nodeOnlyGraphWithAttr edges", self.nodeOnlyGraphWithAttr.edges()
         print "nodeOnlyGraphWithAttr has ", len(self.nodeOnlyGraphWithAttr.nodes()), "nodes and ", len(self.nodeOnlyGraphWithAttr.edges()), "edges"
         self.graphFinal = nx.MultiDiGraph()
@@ -139,6 +145,9 @@ class Instance(object):
         #print "numRadiosPerNode", numRadiosPerNode
         for radioTypeIndex in range(numRadiosPerNode):
             for n in sorted(self.nodeOnlyGraphWithAttr.nodes()):
+                print sorted(self.nodeOnlyGraphWithAttr.nodes())
+                print "n", n
+                
                 self.graphFinal.add_node((n, radioTypeIndex), tcurr = self.nodeOnlyGraphWithAttr.node[n]['tcurr'], trec = self.nodeOnlyGraphWithAttr.node[n]['trec'], battCap = self.nodeOnlyGraphWithAttr.node[n]['battCap'],  
                                          commRange = self.nodeOnlyGraphWithAttr.node[n]['commRange'], 
                                                coor = self.nodeOnlyGraphWithAttr.node[n]['coor'], 
@@ -275,18 +284,19 @@ class Instance(object):
         #nx.draw(ConflictGraph)
         #plt.show() # display
         for edgeInfo in G.edges(data = True):
-            print "edgeInfo", edgeInfo
+            #print "edgeInfo", edgeInfo
             if edgeInfo[2]['edgeType'] == 'virtual':
                 interferenceGraph.add_node((edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel']))
-        for node in interferenceGraph.nodes(data = True):
-            print "infGraph node", interferenceGraph.nodes()
+        #for node in interferenceGraph.nodes(data = True):
+        #    print "infGraph node", interferenceGraph.nodes()
         #for edge in interferenceGraph.edges(data = True):
         #    print "infGraph edge", edge
-    
+        print "inteferenceGraph", interferenceGraph.nodes()
+        
         return interferenceGraph
     
     def createConflictGraph_PhysicalModel(self, G, interfModelType):
-        None
+        global filler
         #print G.edges(data=True)
         #ConflictGraph = nx.DiGraph()
         #for edge1 in G.edges():
@@ -317,7 +327,23 @@ class Instance(object):
         if(G.has_edge(p,j) and G.edge[p][j]['dist'] <= G.node[p]['interferenceRange']):
             return True
     
+    def newdist(self,x1,x2,y1,y2):
+            return np.sqrt( (x2 - x1)**2 + (y2 - y1)**2 ) 
+    
     def cannotBeActiveSimultaneously_802_11_ProtocolModel(self, G, edgeInfo1, edgeInfo2):
+        global transmissiondistance
+        transmissiondistance = 0
+        
+        with open('/Users/jhuff/Desktop/directed-code/Transmitter_1_Omni.csv', 'rU') as f:
+            reader1 = csv.reader(f)
+            mycsvlist1 = list(reader1)
+            degreenumber = [x[0] for x in mycsvlist1]
+            distancenumber = [x[1] for x in mycsvlist1]
+            #print "degreenumber:", degreenumber, "distancenumber:", distancenumber
+            #print "degreenumber[180]", degreenumber[180]
+            
+            #print "distance_number", distancenumber
+            
         i=edgeInfo1[0]
         j=edgeInfo1[1]
         radioType1 = edgeInfo1[2]['radioType']
@@ -332,6 +358,9 @@ class Instance(object):
         #print i, q, G.edge[i][q]['dist']
         #print i, j, radioType1, channel1, "...", p, q, radioType2, channel2
         tuplesOfNodePairs = [(i,q), (q,i), (i,p), (p,i), (j,p), (p,j), (j,q), (q,j)]
+        
+        #tuplesOfNodePairs = [(i,j), (p,q)]
+
         #print "tuplesOfNodePairs", i,j, p, q, tuplesOfNodePairs
         #print "types", edgeInfo1, edgeInfo2
         
@@ -345,16 +374,104 @@ class Instance(object):
         else:
             counter = 0
             for (a,b) in tuplesOfNodePairs:
-                dist = self.euclidDist(G.node[a]['coor'], G.node[b]['coor'])
-                #print i,j, a, b, G.node[a]['coor'], G.node[b]['coor'], "dist", dist
-                #if(G.has_edge(a,b)):
-                    #print G.edge[a][b][0], G.node[a]
-                    #dist = self.euclidDist(G.node[a]['coor'], G.node[b]['coor'])
+                if G.has_edge(a,b):
+                    dist = self.euclidDist(G.node[a]['coor'], G.node[b]['coor'])
+                    #print "single COORD", G.node[a]['coor'][0]
+                    x1 = G.node[a]['coor'][0]
+                    y1 = G.node[a]['coor'][1]
+                    x2 = G.node[b]['coor'][0]
+                    y2 = G.node[b]['coor'][1]
+                    
+                    dist_a_b_new = self.newdist(x1,x2,y1,y2)
+                    #print "dist_a_b_new:", dist_a_b_new
+                    #sys.exit()
+                    #my code edits from 1-15-17 below
+                    xdist = x2 - x1
+                    ydist = y2 - y1
+                    #print "xdist", xdist, "ydist", ydist
+                    #check the above
+                    #print "xdist", xdist
+                    #print "ydist", ydist
+                    #if xdist == 0 and ydist == 0:
+                        #transmissiondistance = 0
+                    if xdist == 0 and ydist != 0:
+                        if y2 > y1:
+                            anglefound = math.pi/2
+                        elif y2 < y1:
+                            anglefound = (3/2) * math.pi
+                    elif ydist == 0 and xdist != 0:
+                        if x2 > x1:
+                            anglefound = 0
+                        elif x2 < x1:
+                            anglefound = math.pi
+                    elif xdist == 0 and ydist == 0:
+                            anglefound = 0.000001 #placeholder value to deal with node compared to itself (i.e., same x and y coordinates)
+                    else:
+                        if ydist > 0 and xdist > 0:
+                            anglefound = np.arctan((ydist / xdist))
+                        elif ydist > 0 and xdist < 0:
+                            anglefound = (np.arctan((ydist / xdist))) + math.pi
+                        elif ydist < 0 and xdist < 0:
+                            anglefound = (np.arctan((ydist / xdist))) + math.pi
+                        elif ydist < 0 and xdist > 0: 
+                            anglefound = (np.arctan((ydist / xdist))) + (2*math.pi)
+                        else:
+                            print "Error"
+                    #print "anglefound in radians:", anglefound, ",", "anglefound in degrees", int(math.degrees(anglefound))
+                    #print "dist_a_b",dist_a_b, "dist_a_b_new", dist_a_b_new
+                    #if dist_a_b <= Transmitter[Nodes_custom[count,3]-1,1]:#verifying the transmitter is transmitting far enough
+                    #if Nodes_custom[count,2]>=Nodes_custom[dist_b_count,2]-1: #and Nodes_custom[count,2]<=Nodes_custom[dist_b_count,2]+1:
+                    #print 'ok' #verifying that along the z axis there is line of sight with the antenna within some tolerance
+                    if anglefound == 0.000001: #0.000001 is a placeholder value to deal with having to compare each node with itself
+                        transmissiondistance = 0
+                        #print "anglefound is 0000001"
+                    else: #int(degreenumber[int(anglefound-1)]) == int(math.degrees(anglefound)): #math.degrees(math.int(anglefound)):
+                                #print "counter", counter
+                        transmissiondistance = distancenumber[int(anglefound-1)]
+                                #print "transmissiondistance2222222", transmissiondistance
+                                #print "transmissiondistance", transmissiondistance
+                
+                    
+                    #print "transmission distance is ", transmissiondistance, "and dist_a_b_new is ", dist_a_b_new
+                    #print "transdist", transmissiondistance
+                    #print "mutliplication", float(transmissiondistance)*self.infRangeMult
+                    if float(transmissiondistance) == 0:
+                           
+                            #dist_b_count = dist_b_count + 1
+                            #print "same node", count, "=", dist_b_count
+                            print "no interference"
+                    elif (.12 >= dist_a_b_new and channel1 == channel2):
+                        #print "cannot be active simultaneously"
+                        return True
+                        
+#                             self.nodeOnlyGraph.add_node(self.ids[count], coor = coorsTuples[count], distToClosest = self.distToClosest[count], tcurr = self.tcurr[count], trec = self.trec[count], battCap = self.battCap[count])#,pos=(Nodes_custom[dist_b_count,0],Nodes_custom[dist_b_count,1]))
+#                             self.nodeOnlyGraph.add_node(self.ids[dist_b_count], coor = coorsTuples[dist_b_count], distToClosest = self.distToClosest[dist_b_count], tcurr = self.tcurr[dist_b_count], trec = self.trec[dist_b_count], battCap = self.battCap[dist_b_count])
+#                             self.nodeOnlyGraph.add_edge(count, dist_b_count, dist = dist_a_b_new, capacity = 1, number = count)
+                        
+#                             
+#                             G_dirAnt.add_node(self.ids[count], coor = coorsTuples[count], distToClosest = self.distToClosest[count], tcurr = self.tcurr[count], trec = self.trec[count], battCap = self.battCap[count])#,pos=(Nodes_custom[dist_b_count,0],Nodes_custom[dist_b_count,1]))
+#                             
+#                             G_dirAnt.add_edge(count, dist_b_count)
+                            
+#                     elif (float(transmissiondistance)*self.infRangeMult < dist_a_b_new):
+                    else:
+                        #print "CAN BE ACTIVE TOGETHER"
+                        return False
+                        
+                            #dist_b_count = dist_b_count + 1
+                            #print "failure with edge between", count, "and ", dist_b_count
+                        
+                    
+                    
                     #print i,j, a, b, G.node[a]['coor'], G.node[b]['coor'], "dist", dist
-                if(dist <= G.node[a]['interferenceRange'] and channel1 == channel2):
-                    #print "infRange", G.node[a]['interferenceRange']
-                    #print "   added b/c of dist:", a, b, channel1, channel2, counter, 'dist', G.edge[a][b][0]['dist']
-                    return True
+                    #if(G.has_edge(a,b)):
+                        #print G.edge[a][b][0], G.node[a]
+                        #dist = self.euclidDist(G.node[a]['coor'], G.node[b]['coor'])
+                        #print i,j, a, b, G.node[a]['coor'], G.node[b]['coor'], "dist", dist
+                    #if(dist <= G.node[a]['interferenceRange'] and channel1 == channel2):
+                        #print "infRange", G.node[a]['interferenceRange']
+                        #print "   added b/c of dist:", a, b, channel1, channel2, counter, 'dist', G.edge[a][b][0]['dist']
+                    #  return True
                 counter += 1
     
     def getSignalStrength(self, power, distance):
