@@ -523,7 +523,7 @@ class Instance(object):
                             #dist_b_count = dist_b_count + 1
                             #print "same node", count, "=", dist_b_count
                             print "no interference"
-                    elif (float(transmissiondistance)*self.infRangeMult and channel1 == channel2):
+                    elif (float(transmissiondistance)*self.infRangeMult >= dist_a_b_new  and channel1 == channel2):
                         #print "cannot be active simultaneously"
                         return True
                         
