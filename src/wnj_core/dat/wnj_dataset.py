@@ -50,12 +50,14 @@ class Wnj_Dataset(object):
         #global numFacs, demPtWts, numDemPts, capacities, pairsDistMatrix
         
         #this is the code that can be used to import data from csv files. The files contain the antenna data: angle and corresponding distance
-        with open('/Users/jhuff/Desktop/directed-code/Transmitter_1_Omni.csv', 'rU') as f:
+        with open('/Users/jhuff/Desktop/directed-code/Transmitter_directed_med.csv', 'rU') as f:
             reader1 = csv.reader(f)
             mycsvlist1 = list(reader1)
             degreenumber = [x[0] for x in mycsvlist1]
             distancenumber = [x[1] for x in mycsvlist1]
-            print "degreenumber:", degreenumber, "distancenumber:", distancenumber
+            print "degreenumber:", degreenumber, 
+            print "distancenumber:", distancenumber[180]
+        
         
         G_dirAnt = nx.Graph()
         
@@ -153,7 +155,7 @@ class Wnj_Dataset(object):
                         anglefound = (np.arctan((ydist / xdist))) + (2*pi)
                     else:
                         print "Error"
-                #print "anglefound in radians:", anglefound, ",", "anglefound in degrees", int(math.degrees(anglefound))
+                print "anglefound in radians:", anglefound, ",", "anglefound in degrees", int(math.degrees(anglefound))
                 #print "dist_a_b",dist_a_b, "dist_a_b_new", dist_a_b_new
                 #if dist_a_b <= Transmitter[Nodes_custom[count,3]-1,1]:#verifying the transmitter is transmitting far enough
                 #if Nodes_custom[count,2]>=Nodes_custom[dist_b_count,2]-1: #and Nodes_custom[count,2]<=Nodes_custom[dist_b_count,2]+1:
@@ -163,7 +165,7 @@ class Wnj_Dataset(object):
                         print "anglefound is 0000001"
                 else: #int(degreenumber[int(anglefound-1)]) == int(math.degrees(anglefound)): #math.degrees(math.int(anglefound)):
                                 #print "counter", counter
-                        transmissiondistance = distancenumber[int(anglefound-1)]
+                        transmissiondistance = distancenumber[int(math.degrees(anglefound))-1]
                 
                 print "transmission distance is ", transmissiondistance, "and dist_a_b_new is ", dist_a_b_new
                 #print "transdist", transmissiondistance
@@ -194,7 +196,7 @@ class Wnj_Dataset(object):
         
         print "G_dirAnt nodes", G_dirAnt.nodes(data=True)
         print "G_dirAnt edges", G_dirAnt.edges()
-        
+        #sys.exit()
         
         #for index in range(0,len(self.ids)):#G_dirAnt.nodes():
          #   self.nodeOnlyGraph.add_node(self.ids[index], coor = coorsTuples[index], distToClosest = self.distToClosest[index], tcurr = self.tcurr[index], trec = self.trec[index], battCap = self.battCap[index])

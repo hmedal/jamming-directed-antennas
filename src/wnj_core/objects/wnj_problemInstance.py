@@ -261,7 +261,7 @@ class Instance(object):
             if (edge[0] != edge[1]): #and edgeInfo['dist'] <= (G.node[edge[0]]['commRange'] + FUZZ):
                 #return True
             
-                with open('/Users/jhuff/Desktop/directed-code/Transmitter_1_Omni.csv', 'rU') as f:
+                with open('/Users/jhuff/Desktop/directed-code/Transmitter_directed_med.csv', 'rU') as f:
                     reader1 = csv.reader(f)
                     mycsvlist1 = list(reader1)
                     degreenumber = [x[0] for x in mycsvlist1]
@@ -319,7 +319,7 @@ class Instance(object):
                         #print "anglefound is 0000001"
                     else: #int(degreenumber[int(anglefound-1)]) == int(math.degrees(anglefound)): #math.degrees(math.int(anglefound)):
                                 #print "counter", counter
-                        transmissiondistance = distancenumber[int(anglefound-1)]
+                        transmissiondistance = distancenumber[int(math.degrees(anglefound))-1]
                         print "transmissiondistance2222222", transmissiondistance
                                 #print "transmissiondistance", transmissiondistance
                 
@@ -417,7 +417,7 @@ class Instance(object):
         global transmissiondistance
         transmissiondistance = 0
         
-        with open('/Users/jhuff/Desktop/directed-code/Transmitter_1_Omni.csv', 'rU') as f:
+        with open('/Users/jhuff/Desktop/directed-code/Transmitter_directed_med.csv', 'rU') as f:
             reader1 = csv.reader(f)
             mycsvlist1 = list(reader1)
             degreenumber = [x[0] for x in mycsvlist1]
@@ -510,7 +510,7 @@ class Instance(object):
                         #print "anglefound is 0000001"
                     else: #int(degreenumber[int(anglefound-1)]) == int(math.degrees(anglefound)): #math.degrees(math.int(anglefound)):
                                 #print "counter", counter
-                        transmissiondistance = distancenumber[int(anglefound-1)]
+                        transmissiondistance = distancenumber[int(math.degrees(anglefound))-1]
                                 #print "transmissiondistance2222222", transmissiondistance
                                 #print "transmissiondistance", transmissiondistance
                 
