@@ -66,7 +66,7 @@ class Wnj_Dataset(object):
         self.numNodes = len(self.ids)
         self.coors = [ast.literal_eval(i) for i in d.xpath('//node/coor[1]/text()')]
         self.distToClosest = [ast.literal_eval(i) for i in d.xpath('//node/distToClosest[1]/text()')]
-        self.tcurr = [int(i) for i in d.xpath('//node/tcurr[1]/text()')]
+        self.tcurr = [ast.literal_eval(i) for i in d.xpath('//node/tcurr[1]/text()')]
         #print "distToClosest", self.distToClosest
         #sys.exit()
         self.trec = [ast.literal_eval(i) for i in d.xpath('//node/trec[1]/text()')]
