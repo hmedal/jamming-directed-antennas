@@ -30,6 +30,7 @@ class Wnj_Dataset(object):
     coors = None
     commodities = {}
     nodeOnlyGraph = nx.DiGraph()
+    tempGraph = nx.DiGraph()
     pos = None
     G_dirAnt = None
     
@@ -194,6 +195,17 @@ class Wnj_Dataset(object):
                 dist_b_count = dist_b_count + 1
             count = count + 1
         
+        print "lentempBEFORE", len(self.nodeOnlyGraph.edges())
+        
+        for node in self.nodeOnlyGraph.edges():
+            if self.nodeOnlyGraph.has_edge(node[1],node[0]):
+                #self.nodeOnlyGraph.add_edge(node[0],node[1])
+                print "keep the node"
+            else:
+                self.nodeOnlyGraph.remove_edge(node[0],node[1])
+
+        print "lentempAFTER", len(self.nodeOnlyGraph.edges())
+        print "nodeOnlygraph" ,self.nodeOnlyGraph.nodes(data=True)
         print "G_dirAnt nodes", G_dirAnt.nodes(data=True)
         print "G_dirAnt edges", G_dirAnt.edges()
         #sys.exit()
