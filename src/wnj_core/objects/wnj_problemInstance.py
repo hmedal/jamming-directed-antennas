@@ -243,16 +243,21 @@ class Instance(object):
             for i in np.arange(0, gridSizeForJamming):
                 for j in np.arange(0, gridSizeForJamming):
                     coordinates = (i/float(gridSizeForJamming - 1), j/float(gridSizeForJamming - 1))
+                    print "NOTE: coordinates are", coordinates[0], coordinates[1]
+                    #import sys
+                    #sys.exit() #WBL: see here
                     self.jamGraph.add_node((coordinates[0], coordinates[1], radioTypeIndex), name = counter, selected = 0.0, power = 1.0, 
                                       cost = 1.0, interferenceRange = self.jamRange, radioType = radioTypeIndex)
                     #print "add", i, j, counter, radioTypeIndex, g_JamGraph.nodes(data=True)
                     pos[coordinates] = coordinates
                     counter += 1
+            #import sys
+            #sys.exit()
         
     def edgeExistsInConnectivityGraph(self, G, edgeInfoAll, interfModelType, radioTypeIndex, channelIndex):
         edge = (edgeInfoAll[0], edgeInfoAll[1])
-        print "edge[0]", G.node[edge[0]]['coor']
-        print"edge[1]", G.node[edge[1]]['coor']
+        #print "edge[0]", G.node[edge[0]]['coor']
+        #print"edge[1]", G.node[edge[1]]['coor']
         edgeInfo = edgeInfoAll[2]
         #edgeIndex = radioTypeIndex * numChannels + channelIndex
         #nodeIndex = edge[0] * numRadiosPerNode + radioTypeIndex
@@ -261,7 +266,7 @@ class Instance(object):
             if (edge[0] != edge[1]): #and edgeInfo['dist'] <= (G.node[edge[0]]['commRange'] + FUZZ):
                 #return True
             
-                with open('/Users/jhuff/Desktop/directed-code/Transmitter_directed_med.csv', 'rU') as f:
+                with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_med.csv', 'rU') as f:
                     reader1 = csv.reader(f)
                     mycsvlist1 = list(reader1)
                     degreenumber = [x[0] for x in mycsvlist1]
@@ -309,7 +314,7 @@ class Instance(object):
                             anglefound = (np.arctan((ydist / xdist))) + (2*math.pi)
                         else:
                             print "Error"
-                    print "anglefound in radians:", anglefound, ",", "anglefound in degrees", int(math.degrees(anglefound))
+                    #print "anglefound in radians:", anglefound, ",", "anglefound in degrees", int(math.degrees(anglefound))
                     #print "dist_a_b",dist_a_b, "dist_a_b_new", dist_a_b_new
                     #if dist_a_b <= Transmitter[Nodes_custom[count,3]-1,1]:#verifying the transmitter is transmitting far enough
                     #if Nodes_custom[count,2]>=Nodes_custom[dist_b_count,2]-1: #and Nodes_custom[count,2]<=Nodes_custom[dist_b_count,2]+1:
@@ -320,7 +325,7 @@ class Instance(object):
                     else: #int(degreenumber[int(anglefound-1)]) == int(math.degrees(anglefound)): #math.degrees(math.int(anglefound)):
                                 #print "counter", counter
                         transmissiondistance = distancenumber[int(math.degrees(anglefound))-1]
-                        print "transmissiondistance2222222", transmissiondistance
+                        #print "transmissiondistance2222222", transmissiondistance
                                 #print "transmissiondistance", transmissiondistance
                 
                     
@@ -417,7 +422,7 @@ class Instance(object):
         global transmissiondistance
         transmissiondistance = 0
         
-        with open('/Users/jhuff/Desktop/directed-code/Transmitter_directed_med.csv', 'rU') as f:
+        with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_med.csv', 'rU') as f:
             reader1 = csv.reader(f)
             mycsvlist1 = list(reader1)
             degreenumber = [x[0] for x in mycsvlist1]

@@ -3091,7 +3091,7 @@ def runProtocolWithJamming_CormicanPathBasedThroughput(gridSize, interdict_budge
     
 def runProtocolWithJamming_FullMIP_RowGenCallback():
     print "runProtocolWithJamming_FullMIP_RowGenCallback"
-    #print "jamLocs", instance.jamGraph.nodes()
+    #print "jamLocs special", instance.jamGraph.nodes()
     global interfModelType
     interfModelType = '802.11-MAC-protocol'
     startTime = time.time()
@@ -3378,7 +3378,7 @@ def defineCutsPresent():
         raise Exception("algType:" + str(algType) + " invalid")
     
 def doPrelimStuff():
-    global exprFilePath, algType, instance, dataset
+    global exprFilePath, algType, instance, dataset #, tcurr1
     exprFilePath, algType = executableModel.parseExprParamsFilePath()
     readInExperimentData(exprFilePath)
     defineCutsPresent()
@@ -3389,6 +3389,8 @@ def doPrelimStuff():
     print "instance created"
     afterReadData()
     print "dominated", getLocationsDominatedBySingleLocation()
+    #print "tcurr1 value is ", tcurr1
+    
 
 def afterReadData():
     global pathNumForCommod, jammersThatCanJamEdge
