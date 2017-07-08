@@ -5,6 +5,8 @@ import math
 import sys
 import time
 import operator
+import csv
+pi = math.pi
 #comment test
 
 import gurobipy
@@ -183,7 +185,10 @@ def getEdgesJammedByJammers(G, jammedNodes, interfModelType):
             if(isEdgeJammedByJammer_Protocol(G, edge, jammedNode, interfModelType)):
                 edgesJammed.append(edge)
                 break
-    return edgesJammed        
+    return edgesJammed 
+
+def distanceformula(x1,x2,y1,y2):
+            return np.sqrt( ((x2 - x1)**2) + ((y2 - y1)**2) )       
             
 def isEdgeJammedByJammer_Protocol(G, edgeTriple, jamLocWithRadioType, interfModelType):
     #print "jamLoc", jamLocWithRadioType, "edgeTriple", edgeTriple, "infRange", instance.jamGraph.node[jamLocWithRadioType]['interferenceRange']
@@ -193,19 +198,158 @@ def isEdgeJammedByJammer_Protocol(G, edgeTriple, jamLocWithRadioType, interfMode
     jamRadioType = jamLocWithRadioType[2]
     edge = (edgeTriple[0], edgeTriple[1])
     edgeChannel = edgeTriple[2]
+    distToReceiver = np.linalg.norm(np.array(jamLoc) - np.array(instance.CGraph.node[edge[1]]['coor']))
+    distToSender = np.linalg.norm(np.array(jamLoc) - np.array(instance.CGraph.node[edge[0]]['coor']))
     #jamLoc = (jamLocWithRadioType[0], jamLocWithRadioType[1])
-    if(jamRadioType == edgeChannel):
-        distToReceiver = np.linalg.norm(np.array(jamLoc) - np.array(instance.CGraph.node[edge[1]]['coor']))
-        #print "distToReceiver", distToReceiver
-        if(distToReceiver <= instance.jamGraph.node[jamLocWithRadioType]['interferenceRange']):
+    if (jamRadioType == edgeChannel):
+        #Question: this is always true for our dataset - just one channel used - right or not?
+        #all old code up to this point
+        
+        with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_zero.csv', 'rU') as f:
+                    reader1 = csv.reader(f)
+                    csvlist1 = list(reader1)
+                    #degreenumber_1 = [x[0] for x in mycsvlist1_1]
+                    distarrayfromcsv = [x[1] for x in csvlist1]
+        
+        xcoornode = instance.CGraph.node[edge[1]]['coor'][0]
+        #print "xcoornode is", xcoornode
+        xcoorjam = jamLoc[0]
+        #print "xcoorjam is", xcoorjam
+        ycoornode = instance.CGraph.node[edge[1]]['coor'][1]
+        #print "ycoornode is", ycoornode
+        ycoorjam = jamLoc[1]
+        #print "ycoorjam is", ycoorjam
+        
+        netxdist = xcoorjam - xcoornode
+        #print "netxdist is", netxdist
+        netydist = ycoorjam - ycoornode
+        #print "netydist is", netydist
+            
+        if netxdist == 0 and netydist == 0:
+            theangle = 0.000005
+        elif netxdist == 0 and netydist != 0:
+            if netydist > 0:
+                theangle = (0.5 * pi)
+            elif netydist < 0:
+                theangle = (1.5 * pi)
+        elif netxdist != 0 and netydist == 0:
+            if netxdist > 0:
+                theangle = 0
+            elif netxdist < 0:
+                theangle = (pi)
+        elif netxdist > 0 and netydist > 0:
+            theangle = np.arctan((netydist / netxdist))
+        elif netxdist < 0 and netydist > 0:
+            theangle = (np.arctan((netydist / netxdist))) + (pi)
+        elif netxdist < 0 and netydist < 0:
+            theangle = (np.arctan((netydist / netxdist))) + (pi)
+        elif netxdist > 0 and netydist < 0:
+            theangle = (np.arctan((netydist / netxdist))) + (2 * pi)
+        else:
+            "Error! An angle is being produced that is invalid!"
+            import sys
+            sys.exit()
+            
+        if theangle == 0.000005:
+            digitaldist = 0 #this is the transmission distance of the rad pattern
+            finaldigitaldist = digitaldist
+        else:
+            digitaldistcounter = int(math.degrees(theangle))-1
+            digitaldist = float(distarrayfromcsv[digitaldistcounter])
+            finaldigitaldist = digitaldist
+        
+        #print "digitaldist is", finaldigitaldist
+        #print "distToReceiver = physicaldist is", distToReceiver   
+        
+        #digitaldist = 0.0834
+        #digitaldist = 0
+        #finaldigitaldist = digitaldist
+        
+            
+        #if(distToReceiver <= instance.jamGraph.node[jamLocWithRadioType]['interferenceRange']):
+        #if float(finaldigitaldist) < float(distToReceiver): #distToReceiver <= digitaldist:
+            #print finaldigitaldist, "<", distToReceiver, ", right?"
+            #print "The digital distance was less than the physical distance! No jamming occurred!"
+            #return False
+            #comment
+        # 
+        #if(distToSender <= instance.jamGraph.node[jamLocWithRadioType]['interferenceRange']): 
+            #return True #commented out
+        if float(distToReceiver) < float(finaldigitaldist):
+            print finaldigitaldist, ">", distToReceiver, ", right?"
+            print "The digital distance was greater than the physical distance! Jamming occurred!"
+            #import sys
+            #sys.exit()
             return True
-        distToSender = np.linalg.norm(np.array(jamLoc) - np.array(instance.CGraph.node[edge[0]]['coor']))
-        #print "distToSender", distToSender
-        if(distToSender <= instance.jamGraph.node[jamLocWithRadioType]['interferenceRange']):
-            return True
+        
+        
+        xcoornode2 = instance.CGraph.node[edge[0]]['coor'][0]
+        #print "xcoornode is", xcoornode
+        xcoorjam2 = jamLoc[0]
+        #print "xcoorjam is", xcoorjam
+        ycoornode2 = instance.CGraph.node[edge[0]]['coor'][1]
+        #print "ycoornode is", ycoornode
+        ycoorjam2 = jamLoc[1]
+        #print "ycoorjam is", ycoorjam
+        
+        netxdist2 = xcoorjam2 - xcoornode2
+        netydist2 = ycoorjam2 - ycoornode2
+            
+        if netxdist2 == 0 and netydist2 == 0:
+            theangle2 = 0.000005
+        elif netxdist2 == 0 and netydist2 != 0:
+            if netydist2 > 0:
+                theangle2 = (0.5 * pi)
+            elif netydist2 < 0:
+                theangle2 = (1.5 * pi)
+        elif netxdist2 != 0 and netydist2 == 0:
+            if netxdist2 > 0:
+                theangle2 = 0
+            elif netxdist2 < 0:
+                theangle2 = (pi)
+        elif netxdist2 > 0 and netydist2 > 0:
+            theangle2 = np.arctan((netydist2 / netxdist2))
+        elif netxdist2 < 0 and netydist2 > 0:
+            theangle2 = (np.arctan((netydist2 / netxdist2))) + (pi)
+        elif netxdist2 < 0 and netydist2 < 0:
+            theangle2 = (np.arctan((netydist2 / netxdist2))) + (pi)
+        elif netxdist2 > 0 and netydist2 < 0:
+            theangle2 = (np.arctan((netydist2 / netxdist2))) + (2 * pi)
+        else:
+            "Error! An angle is being produced that is invalid!"
+            import sys
+            sys.exit()
+            
+        if theangle2 == 0.000005:
+            digitaldist2 = 0 #this is the transmission distance of the rad pattern
+            finaldigitaldist2 = digitaldist2
+        else:
+            digitaldistcounter2 = int(math.degrees(theangle2))-1
+            digitaldist2 = float(distarrayfromcsv[digitaldistcounter2])
+            finaldigitaldist2 = digitaldist2
+            
+        #if(distToReceiver <= instance.jamGraph.node[jamLocWithRadioType]['interferenceRange']):
+        #if float(finaldigitaldist2) < float(distToSender): #distToReceiver <= digitaldist:
+            #print finaldigitaldist2, "<", distToSender, ", right?"
+            #print "The digital distance was less than the physical distance! No jamming occurred!"
+            #return False
+            #comment
+        # 
+        #if(distToSender <= instance.jamGraph.node[jamLocWithRadioType]['interferenceRange']): 
+            #return True #commented out
+        if float(distToSender) < float(finaldigitaldist2):
+            print finaldigitaldist2, ">", distToSender, ", right?"
+            print "The digital distance was greater than the physical distance! Jamming occurred!"
+            #import sys
+            #sys.exit()
+            return True  
     else:
-        return False
+        return False    
+    #import sys
+    #sys.exit()
     return False
+    
+
 
 def isEdgeJammedByJammers(G, edge, jamLocs, interfModelType):
     if((interfModelType == 'simple-protocol') or (interfModelType == '802.11-MAC-protocol')):
@@ -213,6 +357,8 @@ def isEdgeJammedByJammers(G, edge, jamLocs, interfModelType):
             #print "edge", edge, "loc", jamLoc, "canBeJammed", isEdgeJammedByJammer_Protocol(G, edge, jamLoc, interfModelType)
             if isEdgeJammedByJammer_Protocol(G, edge, jamLoc, interfModelType):
                 #print "edge ", edge, " is jammed by  ", jamLoc
+                #import sys
+                #sys.exit()
                 return True
         return False
     
@@ -2281,11 +2427,11 @@ def create_SingleLevelMIP_Cormican_ArcBased(G, jammingGraph, commodities, ISets,
         if((interfModelType == 'simple-protocol') or (interfModelType == '802.11-MAC-protocol')): # use 802.11 MAC
             isetUsageVarsAsDual = create_BottleneckConstraints(G, numISets) #4d
         gurobiModel.addConstr(sum([jammingGraph.node[l]['cost'] * jamPlaced[l] for l in jammingGraph.nodes()]) <= instance.jamBudget, "interdictBudget") #2b
-        if jamVarsType == 'jam-and-interdict-vars':
-            for edgeInfo in G.edges(data = True):
-                edgeTriple = (edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel'])
-                gurobiModel.addConstr(edgeInterdict[edgeTriple] <= sum([jamPlaced[l] for l in jammingGraph.nodes() 
-                        if (int(isEdgeJammedByJammer_Protocol(G, edgeTriple, l, interfModelType)) == 1)]), "arcInterdict_e"+str(edgeTriple))
+        #if jamVarsType == 'jam-and-interdict-vars':
+            #for edgeInfo in G.edges(data = True):
+                #edgeTriple = (edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel'])
+                #gurobiModel.addConstr(edgeInterdict[edgeTriple] <= sum([jamPlaced[l] for l in jammingGraph.nodes() 
+                        #if (int(isEdgeJammedByJammer_Protocol(G, edgeTriple, l, interfModelType)) == 1)]), "arcInterdict_e"+str(edgeTriple))
         if((interfModelType == 'simple-protocol') or (interfModelType == '802.11-MAC-protocol')):
             createCapDualsUBConstraints(G) #may not need to do this anymore
         gurobiModel.update() # integrate objective and constraints

@@ -46,12 +46,8 @@ class Wnj_Dataset(object):
         self.readInDataset_and_CreateNodesAndCommodities(path)
     
     def readInDataset_and_CreateNodesAndCommodities(self, path):
-        global ids, numNodes, coors, commodities, nodeOnlyGraph, G_dirAnt, tcurr
-        #added tcur and trec as global variables on 5-29-17
-        #print "path: ", path
-        #global numFacs, demPtWts, numDemPts, capacities, pairsDistMatrix
         
-        #this is the code that can be used to import data from csv files. The files contain the antenna data: angle and corresponding distance
+        
         with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_med.csv', 'rU') as f:
             reader1 = csv.reader(f)
             mycsvlist1 = list(reader1)
@@ -173,6 +169,7 @@ class Wnj_Dataset(object):
                         print "anglefound is 0000001"
                 else: #int(degreenumber[int(anglefound-1)]) == int(math.degrees(anglefound)): #math.degrees(math.int(anglefound)):
                                 #print "counter", counter
+                        #nonlocal(distancenumber)
                         transmissiondistance = distancenumber[int(math.degrees(anglefound))-1]
                 
                 print "transmission distance is ", transmissiondistance, "and dist_a_b_new is ", dist_a_b_new
@@ -283,7 +280,7 @@ class Wnj_Dataset(object):
                     degreenumber = [x[0] for x in mycsvlist1]
                     distancenumber = [x[1] for x in mycsvlist1]
                     print "degreenumber:", degreenumber, 
-                    print "distancenumber:", distancenumber[180]
+                    print "distancenumber:", distancenumber[180] #example only to use [180]
             
             
             G_dirAnt = nx.Graph()

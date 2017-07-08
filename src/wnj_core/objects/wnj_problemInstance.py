@@ -239,20 +239,44 @@ class Instance(object):
             numRadiosPerNode = 1
         #print "numRadiosPerNode", numRadiosPerNode
         counter = 0
+        newnumbercounter = 0
+        fixList = []
+        #comment
         for radioTypeIndex in range(numRadiosPerNode):
             for i in np.arange(0, gridSizeForJamming):
                 for j in np.arange(0, gridSizeForJamming):
                     coordinates = (i/float(gridSizeForJamming - 1), j/float(gridSizeForJamming - 1))
-                    print "NOTE: coordinates are", coordinates[0], coordinates[1]
-                    #import sys
-                    #sys.exit() #WBL: see here
+                    #print "NOTE: coordinates are", coordinates[0], coordinates[1]
+                    #newcoors={}
+                    #newcoors = coordinates
+                    #comment
+                    #print "NOTE: newcoors are", coordinates[0], coordinates[1]
+                    #while new_counter <= gridSizeForJamming:
+                    fixList.append([coordinates[0], coordinates[1]])
+        print "fixlist is", fixList
+                    #Add sys.exit back in to see results at end of run sequence
+                    
+        #while newnumbercounter < 360:
+            
+        for radioTypeIndex in range(numRadiosPerNode):
+            for i in np.arange(0, gridSizeForJamming):
+                for j in np.arange(0, gridSizeForJamming):
+                    coordinates = (i/float(gridSizeForJamming - 1), j/float(gridSizeForJamming - 1))
+                        #new_counter = new_counter + 1
                     self.jamGraph.add_node((coordinates[0], coordinates[1], radioTypeIndex), name = counter, selected = 0.0, power = 1.0, 
                                       cost = 1.0, interferenceRange = self.jamRange, radioType = radioTypeIndex)
                     #print "add", i, j, counter, radioTypeIndex, g_JamGraph.nodes(data=True)
                     pos[coordinates] = coordinates
+                    #newcounter += 1
                     counter += 1
+                print "NOTE: jam coors are", coordinates[0], coordinates[1]        
+            print "gridSizeForJamming is", gridSizeForJamming
+            #print "The numRadiosPerNode is", numRadiosPerNode, "and radioTypeIndex is", radioTypeIndex
+            #print "fixList is", fixList
             #import sys
             #sys.exit()
+        #import sys
+        #sys.exit()
         
     def edgeExistsInConnectivityGraph(self, G, edgeInfoAll, interfModelType, radioTypeIndex, channelIndex):
         edge = (edgeInfoAll[0], edgeInfoAll[1])
@@ -363,7 +387,10 @@ class Instance(object):
                 if(edgeInfo1 != edgeInfo2):
                     if(self.cannotBeActiveSimultaneously(G, edgeInfo1, edgeInfo2, interfModelType) is True):
                         edge1 = (edgeInfo1[0], edgeInfo1[1], edgeInfo1[2]['channel'])
+                        #print "edge1[0], edge1[1], edge1[2]['channel'] is", edge1
                         edge2 = (edgeInfo2[0], edgeInfo2[1], edgeInfo2[2]['channel'])
+                        #print "edge2[0], edge2[1], edge2[2]['channel'] is", edge2
+                        #comment
                         #print "add:", edgeInfo1[0], edgeInfo1[1], edgeInfo1[2]['radioType'], edgeInfo1[2]['channel'], "***", edgeInfo2[0], edgeInfo2[1], edgeInfo2[2]['radioType'], edgeInfo2[2]['channel']
                         interferenceGraph.add_edge(edge1, edge2)
                         
@@ -379,8 +406,9 @@ class Instance(object):
         #    print "infGraph node", interferenceGraph.nodes()
         #for edge in interferenceGraph.edges(data = True):
         #    print "infGraph edge", edge
-        print "inteferenceGraph", interferenceGraph.nodes()
-        
+        print "interferenceGraph", interferenceGraph.nodes()
+        #import sys
+        #sys.exit()
         return interferenceGraph
     
     def createConflictGraph_PhysicalModel(self, G, interfModelType):
