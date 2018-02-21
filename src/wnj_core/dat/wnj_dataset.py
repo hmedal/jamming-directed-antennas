@@ -48,7 +48,7 @@ class Wnj_Dataset(object):
     def readInDataset_and_CreateNodesAndCommodities(self, path):
         
         
-        with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_med.csv', 'rU') as f:
+        with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_new_high.csv', 'rU') as f:
             reader1 = csv.reader(f)
             mycsvlist1 = list(reader1)
             degreenumber = [x[0] for x in mycsvlist1]
@@ -107,6 +107,9 @@ class Wnj_Dataset(object):
 
         def newdist(x1,x2,y1,y2):
             return np.sqrt( (x2 - x1)**2 + (y2 - y1)**2 )
+        
+        def new3ddist(x1,x2,y1,y2,z1,z2):
+            return np.sqrt( (x2 - x1)**2 + (y2 - y1)**2 + (z2 - z1)**2 )
         
         count = 0
         while count < len(Nodes_custom2):
@@ -265,22 +268,22 @@ class Wnj_Dataset(object):
             print "NEW CODE BEGINS HERE"
             
             
-            if tcurr1new['tcurr'] < 50:
-                with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_med.csv', 'rU') as f:
+            if 1 < 10: #tcurr1new['tcurr'] < 50:
+                with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_new_high.csv', 'rU') as f:
                     reader1 = csv.reader(f)
                     mycsvlist1 = list(reader1)
                     degreenumber = [x[0] for x in mycsvlist1]
                     distancenumber = [x[1] for x in mycsvlist1]
-                    print "degreenumber:", degreenumber, 
-                    print "distancenumber:", distancenumber[180]
+                    #print "degreenumber:", degreenumber, 
+                    #print "distancenumber:", distancenumber[180]
             else:
-                with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_high.csv', 'rU') as f:
+                with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_new.csv', 'rU') as f:
                     reader1 = csv.reader(f)
                     mycsvlist1 = list(reader1)
                     degreenumber = [x[0] for x in mycsvlist1]
                     distancenumber = [x[1] for x in mycsvlist1]
-                    print "degreenumber:", degreenumber, 
-                    print "distancenumber:", distancenumber[180] #example only to use [180]
+                    #print "degreenumber:", degreenumber, 
+                    #print "distancenumber:", distancenumber[180] #example only to use [180]
             
             
             G_dirAnt = nx.Graph()

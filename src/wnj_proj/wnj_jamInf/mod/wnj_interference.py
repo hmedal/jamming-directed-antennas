@@ -64,6 +64,7 @@ slackUBConstr = None
 #variables
 edgeInterdict = None
 jamPlaced = None
+transPlaced = None
 jamPlacedLP = None
 flowVars = None
 inSet = None
@@ -194,6 +195,9 @@ def isEdgeJammedByJammer_Protocol(G, edgeTriple, jamLocWithRadioType, interfMode
     #print "jamLoc", jamLocWithRadioType, "edgeTriple", edgeTriple, "infRange", instance.jamGraph.node[jamLocWithRadioType]['interferenceRange']
     #print g_JamGraph.nodes(data=True)
     #print g_JamGraph.node[jamLoc]
+    #print tcurr1new
+    #import sys
+    #sys.exit()
     jamLoc = (jamLocWithRadioType[0], jamLocWithRadioType[1])
     jamRadioType = jamLocWithRadioType[2]
     edge = (edgeTriple[0], edgeTriple[1])
@@ -205,7 +209,7 @@ def isEdgeJammedByJammer_Protocol(G, edgeTriple, jamLocWithRadioType, interfMode
         #Question: this is always true for our dataset - just one channel used - right or not?
         #all old code up to this point
         
-        with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_zero.csv', 'rU') as f:
+        with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_new.csv', 'rU') as f:
                     reader1 = csv.reader(f)
                     csvlist1 = list(reader1)
                     #degreenumber_1 = [x[0] for x in mycsvlist1_1]
@@ -276,8 +280,8 @@ def isEdgeJammedByJammer_Protocol(G, edgeTriple, jamLocWithRadioType, interfMode
         #if(distToSender <= instance.jamGraph.node[jamLocWithRadioType]['interferenceRange']): 
             #return True #commented out
         if float(distToReceiver) < float(finaldigitaldist):
-            print finaldigitaldist, ">", distToReceiver, ", right?"
-            print "The digital distance was greater than the physical distance! Jamming occurred!"
+            #print finaldigitaldist, ">", distToReceiver, ", right?"
+            #print "The digital distance was greater than the physical distance! Jamming occurred!"
             #import sys
             #sys.exit()
             return True
@@ -338,8 +342,8 @@ def isEdgeJammedByJammer_Protocol(G, edgeTriple, jamLocWithRadioType, interfMode
         #if(distToSender <= instance.jamGraph.node[jamLocWithRadioType]['interferenceRange']): 
             #return True #commented out
         if float(distToSender) < float(finaldigitaldist2):
-            print finaldigitaldist2, ">", distToSender, ", right?"
-            print "The digital distance was greater than the physical distance! Jamming occurred!"
+            #print finaldigitaldist2, ">", distToSender, ", right?"
+            #print "The digital distance was greater than the physical distance! Jamming occurred!"
             #import sys
             #sys.exit()
             return True  
@@ -347,7 +351,7 @@ def isEdgeJammedByJammer_Protocol(G, edgeTriple, jamLocWithRadioType, interfMode
         return False    
     #import sys
     #sys.exit()
-    return False
+    #return False
     
 
 
@@ -773,6 +777,7 @@ def computeThroughputForJammingSolution(G, JammingGraph, jamLocs, Paths, ISets, 
     setParams(rel_gap_tol, lazy = False)
     resetObjectiveForThroughputProblem(instance.CGraph, jamLocs, instance.commodities)
     flow, isSetUsage, th, thNoPen = solveThroughputProblem_Pricing_CormicanArcBased(instance.CGraph, None, interfModelType, g_capacityDuals)
+    print "the throughput value from Benders is", th
     return th
 
 def printBendersClassicInfo(iteration, lb, ub, jamLocs):
@@ -1828,6 +1833,8 @@ def getObjective_ThroughputModel_Cormican(G, jamLocs, commodities):
     sum1 = sum([returnFlow[commod] for commod in commodities.keys()])
     #print "isJammedList", isJammedList
     sum2 = sum([flowVars[commodity][edge] * isJammedList[edge] for edge in edgeTriples for commodity in commodities.keys()])
+    #sum2 = 0
+    #WBL edit - making of sum2 = 0 to remove penalty function
     return sum1 - sum2
 
 def addConstraintForThroughputValue(G, jamLocs, commodities, throughput):
@@ -1923,6 +1930,9 @@ def createSlackVariableUBs(G, commodities, defaultValue):
     
 def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamLocs, interfModelType, stabilize = False):
     global gurobiThroughputModel, iSetUsage, flowBalanceConstrs, capConstraints, usageConstr, jamConstrs, flowVars, commodDemConstr, returnFlow, slackVars, slackUBConstr, slackVariableMultipliers, slackVarUBs
+    global transPlacedConstr
+    global transPlaced
+    #WBL edit - additional of global variable for trans placed constraints
     numISets = len(ISets)
     gurobiThroughputModel = gurobipy.Model("createThroughputModel_ContinuousJamming_Cormican")
     try:
@@ -1934,10 +1944,35 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
             )
             for commodity in commodities.keys()])
         dummyVar = gurobiThroughputModel.addVar(0, obj = 0.0, name="dummyVar")
-        
+        #transPlaced = 
+        for edge in edgeTriples:
+            print edgeTriples, "edgeTriples"
+            print edge, "edge"
+            print "testing value"
+            #transPlaced = []
+            #transPlaced = dict([
+            #(edge[0], gurobiThroughputModel.addVar(0, name="flow_"+str(edge[0])+","+str(edge[1]))) for edge in edgeTriples])
+            #i = 200
+            
+            transPlacedVars = dict([
+            (edge[0], gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name="at_"+str(edge[0])))])
+            
+            #thexcoornode = instance.CGraph.node[edge[1]]['coor'][0]
+            #theycoornode = instance.CGraph.node[edge[1]]['coor'][1]
+            #transPlaced.append(gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name = "trans_"+str(edge[0])))
+            #transPlaced[edge[0]] = gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name = "trans_"+str(edge[0]))
+            #if transPlaced[edge[1]] != transPlaced[edge[0]]:
+            #transPlaced.append(gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name = "trans_"+str(edge[1])))
+            #    transPlaced[edge[1]] = gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name = "trans_"+str(edge[1]))
+            #if edge[1] not in transPlaced
+                #extra = dict([(edge[1], gurobiThroughputModel.addVar(0, name = "trans_"+str(edge[1])+str(edge[0])))]) 
+                #transPlaced.update(extra)
+            
+        #WBL edit - transPlaced var creation
+        #if 
         # Slack variables
-        if stabilize:
-            slackVars = createSlackVariables(G, commodities)
+        #if stabilize:
+        #    slackVars = createSlackVariables(G, commodities)
         
         # Other
         returnFlow = dict([(commod, gurobiThroughputModel.addVar(0, name="returnFlow_"+str(commod))) for commod in commodities.keys()])
@@ -1951,7 +1986,9 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
             if slackVariableMultipliers is None:
                 slackVariableMultipliers = createSlackVariableMultipliers(G, commodities, 0.0)
             penaltyTerm = getObjective_Penalty_Term(G, commodities, slackVars, slackVariableMultipliers)
+            penaltyTerm = 0
             gurobiThroughputModel.setObjective(regularTerm + penaltyTerm, gurobipy.GRB.MAXIMIZE) #####  NEED TO CHANGE THIS WHEN FINISHED (add penalty term)
+            #WBL edit - removal of objective penalty term
         else:
             gurobiThroughputModel.setObjective(regularTerm, gurobipy.GRB.MAXIMIZE)
         
@@ -1999,6 +2036,31 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
                     usageConstr = gurobiThroughputModel.addConstr(sum([iSetUsage[k] for k in range(numISets)]) <= 1, "iSetUsage")
                 else:
                     usageConstr = gurobiThroughputModel.addConstr(sum([iSetUsage[k] for k in range(numISets)]) -slackVars['-']['usage'] + slackVars['+']['usage'] <= 1, "iSetUsage")
+        #WBL edit - addition of trans placed constraints below
+            transPlacedConstr = {}
+            
+            #for edge in edgeTriples:
+            #    transPlacedConstr[edge] = {}
+            #for edge in edgeTriples:
+                #transPlacedConstr[edge][0] = gurobiThroughputModel.addConstr(sum([flowVars[commodity][edge] for commodity in commodities.keys()]) <= 
+                #                      sum([iSetUsage[k] * int(edge in ISets[k]) * G.edge[edge[0]][edge[1]]['capacity'] * transPlaced[str(([edge][0]))] for k in range(numISets)]), 
+                #                           "placement0_"+str(edge[0])+","+str(edge[1]))
+                #transPlacedConstr[edge][1] = gurobiThroughputModel.addConstr(sum([flowVars[commodity][edge] for commodity in commodities.keys()]) <= 
+                #                       sum([iSetUsage[k] * int(edge in ISets[k]) * G.edge[edge[0]][edge[1]]['capacity'] * transPlaced[str(([edge][1]))] for k in range(numISets)]), 
+                #                           "placement1_"+str(edge[0])+","+str(edge[1]))
+                #print str(edge[0]), "str(edge[0])"
+                #print edge[0], "edge[0]"
+                
+                #gurobiThroughputModel.addConstr(sum((transPlaced[int([edge][0])]) + (transPlaced[int([edge][1])])) <= 5)
+                #WBL edit - budget constr
+            #transPlaced = dict([(edge[0], gurobiThroughputModel.addVar(0, name = "trans_"+str(edge[0])+str(edge[1])) for edge in edgeTriples)]) 
+        #for edge in edgeTriples:
+            #if edge[1] not in transPlaced.keys():
+                #extra = dict([(edge[1], gurobiThroughputModel.addVar(0, name = "trans_"+str(edge[1])+str(edge[0])) for edge in edgeTriples)]) 
+                #transPlaced.update(extra)
+        
+        #WBL edit - adding trans placed constraints
+        
         elif(interfModelType == 'none'):
             capConstraints = {}
             for edge in edgeTriples:
@@ -2447,6 +2509,7 @@ def create_BendersMasterProb_Cormican_ArcBased(G, jammingGraph, commodities, ISe
     try:
         # Create variables
         jamPlaced = dict([(n, gurobiModel.addVar(vtype=gurobipy.GRB.BINARY, name="jam_l"+str(n[0])+","+str(n[1]))) for n in jammingGraph.nodes()])
+        #transPlaced = dict([(n, gurobiModel.addVar(vtype=gurobipy.GRB.BINARY, name="trans_"+str(n[0])+","+str(n[1]))) for n in connectivityGraph.nodes()])
         approxVar = gurobiModel.addVar(0, vtype=gurobipy.GRB.CONTINUOUS, name="approxVar")
         gurobiModel.update() # Integrate new variables
         # Set objective
@@ -2911,7 +2974,7 @@ def solveThroughputProblem_Pricing_CormicanArcBased(G, edgesJammed, interfModelT
         maxWeights, solnsSet = modifyAndSolve_maxWtIndepSet(instance.interferenceGraph, nodeWeights, interfModelType, count)
         maxWeight = maxWeights[0]
         selected = solnsSet[0]
-        print "throughput", throughput
+        print "throughput", throughput, "throughputWithoutPenalty", throughputWithoutPenalty
         print "maxWt", maxWeight, "usageDual", usageDual #, selected
         newISetAvailable = ((maxWeight - usageDual) > FUZZ)
         if((newISetAvailable is False) and slackVarsAreZero(slackVarValues, G, instance.commodities, stabilize)):
@@ -2938,6 +3001,7 @@ def solveThroughputProblem_Pricing_CormicanArcBased(G, edgesJammed, interfModelT
     g_capacityDuals = capacityDuals
     flowVarSoln = dict([(commod, dict([(edge, flowVars[commod][edge].X) for edge in flowVars[commod].keys()])) for commod in instance.commodities.keys()])
     isetUsageSoln = [iSetUsage[k].X for k in range(len(ISets))]
+    print "throughput Without Penalty 2", throughputWithoutPenalty, "and throughput proper", throughput
     return flowVarSoln, isetUsageSoln, throughput, throughputWithoutPenalty
 
 def OLD_getCorePoint_Rounded():
@@ -3055,6 +3119,7 @@ def solveThroughputProblem(G, iteration, interfModelType, suffix = '', stabilize
         gurobiThroughputModel.optimize()
         throughputWithPenalty = gurobiThroughputModel.objVal
         throughputWithoutPenalty = sum([returnFlow[commod].X for commod in instance.commodities.keys()])
+        print "throughputWithPenalty 3", throughputWithPenalty, "and throughputWithoutPenalty"
         
         flowBalDuals = {}
         for commod in instance.commodities.keys():
@@ -3315,8 +3380,9 @@ def runProtocolWithJamming_Benders():
     instanceInfo = [instance.numJamLocs, instance.commRange, instance.infRange, instance.multRadiosPerNode, instance.numChannels, instance.jamBudget, instance.jamRange, instance.maxNumHops]
     algParams = [algType]
     algOutput = [runTime, numNodesExplored, numMaxWtIndSetProbsSolved, lb, ub]
+    print "algOutput", algOutput
     solnOutput = [ub]
-    dbUtil.printResultsToDB(databaseName, tableName, infrastructureInfo, modelInfo, dataSetInfo, instanceInfo, algParams, algOutput, solnOutput)
+    #dbUtil.printResultsToDB(databaseName, tableName, infrastructureInfo, modelInfo, dataSetInfo, instanceInfo, algParams, algOutput, solnOutput)
     print "FINISHED"
     
 # not working
@@ -3438,6 +3504,7 @@ def initializeSets():
         Paths[commod] = []
     ISets = []
     edgeTriples = [(edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel']) for edgeInfo in instance.CGraph.edges(data = True)]
+    print "edgeTriples are", edgeTriples
     #print "edgeTriples"
     #print edgeTriples
     for edgeInfo in instance.CGraph.nodes(data=True):
