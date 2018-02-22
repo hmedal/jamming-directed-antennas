@@ -744,8 +744,8 @@ def runBenders_Classic(G, JammingGraph, Paths, ISets, max_hop_length, interfMode
             create_BendersMasterProb_LP_Cormican_ArcBased(G, instance.jamGraph, instance.commodities, ISets, interfModelType)
     elif flowVarsType == 'arc-based' and modelType == 'regular':
         raise Exception("configuration must be flowVarsType == 'arc-based' and modelType == 'cormican'")
-    setVars_Benders_Classic(instance.modelType)
-    setParams(rel_gap_tol, lazy = False)
+    setVars_Benders_Classic(instance.modelType) #not important
+    setParams(rel_gap_tol, lazy = False) #not important
     lb = 0
     ub = float('inf')
     iteration = 1
@@ -761,9 +761,9 @@ def runBenders_Classic(G, JammingGraph, Paths, ISets, max_hop_length, interfMode
         flow, isSetUsage, th, thNoPen = solveThroughputProblem_Pricing_CormicanArcBased(instance.CGraph, None, interfModelType, g_capacityDuals)
         ub = min(th, ub)
         addCuts_BendersClassic(gurobiModel, jamLocs, flow, th, thNoPen, jamPlaced, approxVar, iteration, ub)
-        printBendersClassicInfo(iteration, lb, ub, jamLocs)
+        #printBendersClassicInfo(iteration, lb, ub, jamLocs)
         iteration += 1
-    return lb, ub, jamLocs
+    return lb, ub#, jamLocs
 
 def computeThroughputForJammingSolution(G, JammingGraph, jamLocs, Paths, ISets, max_hop_length, interfModelType, rel_gap_tol = 0.0001):
     global numNodesExplored
@@ -796,7 +796,7 @@ def addCuts_BendersClassic(myModel, jamLocs, flowSoln, throughput, thNoPen, jamL
     flowVarSolnForBendersCut = flowSoln
     throughputNoPenForBendersCut = thNoPen
     jamLocs = [n for n in jamLocVarsDict.keys() if jamLocVarsDict[n].X > 0.0]
-    if includeTrustRegion is True:
+    if includeTrustRegion is True: #ignore
         if iteration <= trust_region_max_iter:
             threshold = max(2, instance.jamBudget)
             setTrustRegionConstraint(myModel, jamLocs, threshold, iteration)
@@ -804,28 +804,28 @@ def addCuts_BendersClassic(myModel, jamLocs, flowSoln, throughput, thNoPen, jamL
             myModel.remove(trustRegionConstr)
     if throughput < smallestSubprobThroughput:
         smallestSubprobThroughput = throughput
-    if includeParetoOptimalBendersCuts is True:
-        corePoint = getCorePoint_Fractional()
-        resetObjectiveForThroughputProblem_JamVector(instance.CGraph, corePoint, instance.commodities)
-        addConstraintForThroughputValue(instance.CGraph, jamLocs, instance.commodities, throughput)
-        flowVarSolnForBendersCut, isetUsageSolnPareto, throughputPareto, throughputNoPenForBendersCut = solveThroughputProblem_Pricing_CormicanArcBased(instance.CGraph, None, interfModelType, g_capacityDuals, suffix = 'classic-pareto')
-        bendersExpr = getConstraintExpressionForBendersCut_JamVarsOnly_ArcBased(flowVarSolnForBendersCut, throughputNoPenForBendersCut, jamLocVarsDict, approxVar)
-        print "paretoCutExpr", bendersExpr
-        gurobiThroughputModel.remove(throughputEqualsValueConstr)
+    if includeParetoOptimalBendersCuts is True: #ignore
+        #corePoint = getCorePoint_Fractional()
+        #resetObjectiveForThroughputProblem_JamVector(instance.CGraph, corePoint, instance.commodities)
+        #addConstraintForThroughputValue(instance.CGraph, jamLocs, instance.commodities, throughput)
+        #flowVarSolnForBendersCut, isetUsageSolnPareto, throughputPareto, throughputNoPenForBendersCut = solveThroughputProblem_Pricing_CormicanArcBased(instance.CGraph, None, interfModelType, g_capacityDuals, suffix = 'classic-pareto')
+        #bendersExpr = getConstraintExpressionForBendersCut_JamVarsOnly_ArcBased(flowVarSolnForBendersCut, throughputNoPenForBendersCut, jamLocVarsDict, approxVar)
+        #print "paretoCutExpr", bendersExpr
+        gurobiThroughputModel.remove(throughputEqualsValueConstr) #ignore
     else:
         bendersExpr = getConstraintExpressionForBendersCut_JamVarsOnly_ArcBased(flowVarSolnForBendersCut, throughputNoPenForBendersCut, jamLocVarsDict, approxVar)
         print "bendersExpr", bendersExpr
     myModel.addConstr(bendersExpr)
-    if includeParetoOptimalBendersCuts:
+    if includeParetoOptimalBendersCuts: #ignore
         masterProbLP.addConstr(bendersExpr)
-    if includeKnapsack is True:
+    if includeKnapsack is True: #ignore
         knapsackExpr = getConstraintExpressionFor_KI_Cut_JamVarsOnly_ArcBased(bestUB, flowVarSolnForBendersCut, throughputNoPenForBendersCut, jamLocVarsDict, approxVar)
         #print "rhs", bestMIP_upperBound, throughputWithoutPenaltyForBendersCut, math.floor(bestMIP_upperBound - throughputWithoutPenaltyForBendersCut)
         print "knapsackExpr", knapsackExpr
         myModel.addConstr(knapsackExpr)
         if includeParetoOptimalBendersCuts:
             masterProbLP.addConstr(knapsackExpr)
-    if includeSuperValid is True:
+    if includeSuperValid is True: #ignore
         print "smallestSubprobThroughput", smallestSubprobThroughput
         addAndUpdateSupervalidCuts_Classic(myModel, bestUB, smallestSubprobThroughput, flowVarSolnForBendersCut, throughputNoPenForBendersCut, jamLocVarsDict)
         
@@ -1416,6 +1416,7 @@ def getConstraintExpressionForBendersCut_JamVarsOnly_ArcBased(flowVarValues, thr
         for e in flowVars[commod].keys():
             if flowVarValues[commod][e] > FUZZ:
                 secondSum += sum(flowVarValues[commod][e] * jamLocVarsDict[node] for node in jammersThatCanJamEdge[e])
+    #WBL edit 2/22 - where I set secondSum for Benders = items from my eq (19), duals of transPlaced vars
     return throughput - secondSum <= approxVarArg
         
 def getConstraintExpressionForBendersCut_JamAndEdgeInterdictVars(JammingGraph, flowVarValues, interdictVarsDict, approxVarArg):
@@ -1806,7 +1807,7 @@ def createThroughputModel(G, commodities, ISets, jammingGraph, interferenceModel
 #     except gurobipy.GurobiError as e:
 #         print "createThroughputModel_ContinuousJamming", str(e)
 
-def resetObjectiveForThroughputProblem(G, jamLocs, commodities):
+def resetObjectiveForThroughputProblem(G, jamLocs, commodities): #already removed effect of jammers from this
     gurobiThroughputModel.setObjective(getObjective_ThroughputModel_Cormican(G, jamLocs, commodities))
     
 def resetObjectiveForThroughputProblem_JamVector(G, jammingVarValuesMap, commodities):
@@ -1823,19 +1824,19 @@ def getObjective_ThroughputModel_Cormican_JamVector(G, jammingVarValuesMap, comm
     return sum1 - sum2
 
 def getObjective_ThroughputModel_Cormican(G, jamLocs, commodities):
-    isJammedList = {}
-    for edge in edgeTriples:
-        if(sum([int(isEdgeJammedByJammer_Protocol(G, edge, node, interfModelType)) for node in jamLocs]) >= 1):
-            isJammedList[edge] = 1
-        else:
-            isJammedList[edge] = 0
+    #isJammedList = {}
+    #for edge in edgeTriples:
+    #    if(sum([int(isEdgeJammedByJammer_Protocol(G, edge, node, interfModelType)) for node in jamLocs]) >= 1):
+    #        isJammedList[edge] = 1
+    #    else:
+    #        isJammedList[edge] = 0
     #print "isJammed", [(i,isJammedList[i]) for i in isJammedList.keys() if isJammedList[i] > 0.0001]
     sum1 = sum([returnFlow[commod] for commod in commodities.keys()])
     #print "isJammedList", isJammedList
-    sum2 = sum([flowVars[commodity][edge] * isJammedList[edge] for edge in edgeTriples for commodity in commodities.keys()])
-    #sum2 = 0
+    #sum2 = sum([flowVars[commodity][edge] * isJammedList[edge] for edge in edgeTriples for commodity in commodities.keys()])
+    sum2 = 0
     #WBL edit - making of sum2 = 0 to remove penalty function
-    return sum1 - sum2
+    return sum1# - sum2
 
 def addConstraintForThroughputValue(G, jamLocs, commodities, throughput):
     global throughputEqualsValueConstr
@@ -1859,6 +1860,8 @@ def getObjective_Penalty_Term(G, commodities, slackVars, slackVariableMultiplier
     constrName = 'usage'
     penaltyTerm -= slackVariableMultipliers['-'][constrName]*slackVars['-'][constrName]
     penaltyTerm += slackVariableMultipliers['+'][constrName]*slackVars['+'][constrName]
+    penaltyTerm = 0
+    #WBL edit 2/21
     return penaltyTerm
 
 def createSlackVariables(G, commodities):
@@ -1944,18 +1947,19 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
             )
             for commodity in commodities.keys()])
         dummyVar = gurobiThroughputModel.addVar(0, obj = 0.0, name="dummyVar")
-        #transPlaced = 
-        for edge in edgeTriples:
-            print edgeTriples, "edgeTriples"
-            print edge, "edge"
-            print "testing value"
+        transPlaced = dict([(n, gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name="transPlaced_l"+str(n))) for n in G.nodes()])
+        print "transPlaced dict is", transPlaced
+        #for edge in edgeTriples:
+            #print edgeTriples, "edgeTriples"
+            #print edge, "edge"
+            #print "testing value"
             #transPlaced = []
             #transPlaced = dict([
             #(edge[0], gurobiThroughputModel.addVar(0, name="flow_"+str(edge[0])+","+str(edge[1]))) for edge in edgeTriples])
             #i = 200
             
-            transPlacedVars = dict([
-            (edge[0], gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name="at_"+str(edge[0])))])
+            #transPlacedVars = dict([
+            #(edge[0], gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name="at_"+str(edge[0])))])
             
             #thexcoornode = instance.CGraph.node[edge[1]]['coor'][0]
             #theycoornode = instance.CGraph.node[edge[1]]['coor'][1]
@@ -2006,6 +2010,7 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
                 sumIn = 0
                 for edgeInfo in G.in_edges([node], data = True):
                     edgeTriple = (edgeInfo[0], edgeInfo[1], edgeInfo[2]['channel'])
+                    
                     sumIn += flowVars[commod][edgeTriple]
                 if stabilize is False:
                     flowBalanceConstrs[commod][node] = gurobiThroughputModel.addConstr(indicator + sumOut == sumIn, "flowBal_"+str(node))
@@ -2015,16 +2020,45 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
         if((interfModelType == 'simple-protocol') or (interfModelType == '802.11-MAC-protocol')):
             # Capacity
             capConstraints = {}
+            transPlacedConstr = {}
+            #WBL edit 2/21
             for edge in edgeTriples:
                 if stabilize is False:
-                    capConstraints[edge] = gurobiThroughputModel.addConstr(sum([flowVars[commodity][edge] for commodity in commodities.keys()]) <= 
-                                       sum([iSetUsage[k] * int(edge in ISets[k]) * G.edge[edge[0]][edge[1]]['capacity'] for k in range(numISets)]), 
-                                           "capacity_"+str(edge[0])+","+str(edge[1]))
+                    capConstraints[edge] = gurobiThroughputModel.addConstr(sum([flowVars[commodity][edge] for commodity in commodities.keys()]) <= \
+                                                    sum([iSetUsage[k] * int(edge in ISets[k]) * G.edge[edge[0]][edge[1]]['capacity'] for k in range(numISets)]), \
+                                                    "capacity_"+str(edge[0])+","+str(edge[1]))
+                    print "capConstraints[edge] are", capConstraints[edge]
+                    #print "G.edge[edge[0]][edge[1]]['capacity']", G.edge[edge[0]][edge[1]]['capacity']
+                    
+                    #transPlacedConstr[edge] = gurobiThroughputModel.addConstr(sum([flowVars[commodity][edge] for commodity in commodities.keys()]) <= 
+                    #                   sum([iSetUsage[k] * int(edge in ISets[k]) * G.edge[edge[0]][edge[1]]['capacity'] for k in range(numISets)]), 
+                    #                       "capacity_"+str(edge[0])+","+str(edge[1]))
+                    #print "edge[0]", edge[0]
+                    #print "G.edge", G.edge
+                    #print "G.edge[edge[0]]", G.edge[edge[0]]
+                    #print "G.edge[edge[0]][edge[1]]", G.edge[edge[0]][edge[1]]
+                    #print "G.edge[edge[0]][edge[1]][0]['capacity']", G.edge[edge[0]][edge[1]][0]['capacity']
+                    #print "sum([iSetUsage[k] * int(edge in ISets[k]) * G.edge[edge[0]][edge[1]]['capacity'] for k in range(numISets)])", sum([iSetUsage[k] * int(edge in ISets[k]) * G.edge[edge[0]][edge[1]]['capacity'] for k in range(numISets)])
+                    #import sys
+                    #sys.exit()
+                    #print "G.edge[edge[0]][edge[1]]['capacity']", G.edge[edge[0]][edge[1]]['capacity']
+                    transPlacedConstr[edge[0]] = gurobiThroughputModel.addConstr(sum([flowVars[commodity][edge] for commodity in commodities.keys()]) <= \
+                                                                                          (1000 * transPlaced[edge[0]]))
+                    #import sys
+                    #sys.exit()
+                    #WBL edit 2/21
+            
                 else:
                     capConstraints[edge] = gurobiThroughputModel.addConstr(sum([flowVars[commodity][edge] for commodity in commodities.keys()]) -slackVars['-']['cap'][edge] + \
                                                                                        slackVars['+']['cap'][edge] <= 
                                        sum([iSetUsage[k] * int(edge in ISets[k]) * G.edge[edge[0]][edge[1]]['capacity'] for k in range(numISets)]), 
                                            "capacity_"+str(edge[0])+","+str(edge[1]))
+            extrasum = 0
+            for edge in edgeTriples:
+                if int(transPlaced[edge[0]]) == 1:
+                    extrasum = extrasum + 1
+            print "extrasum is", extrasum
+            gurobiThroughputModel.addConstr((extrasum) <= 49)
             # Usage
             if numISets < 1:
                 if stabilize is False:
@@ -2037,7 +2071,7 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
                 else:
                     usageConstr = gurobiThroughputModel.addConstr(sum([iSetUsage[k] for k in range(numISets)]) -slackVars['-']['usage'] + slackVars['+']['usage'] <= 1, "iSetUsage")
         #WBL edit - addition of trans placed constraints below
-            transPlacedConstr = {}
+            #transPlacedConstr = {}
             
             #for edge in edgeTriples:
             #    transPlacedConstr[edge] = {}
@@ -2110,6 +2144,8 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
             gurobiThroughputModel.write("/tmp/ThroughputInitial_Cormican_"+interfModelType + ".lp")
     except gurobipy.GurobiError as e:
         print "createThroughputModel_ContinuousJamming", str(e)
+    import sys
+    sys.exit()
 
 def updateSlackStuffInModel(G, commodities):
     global slackUBConstr, slackVars
@@ -2464,6 +2500,7 @@ def create_SingleLevelMIP_Regular_ArcBased(G, jammingGraph, commodities, ISets, 
         
 def create_SingleLevelMIP_Cormican_ArcBased(G, jammingGraph, commodities, ISets, interfModelType): # creates model from equation (9)
     global gurobiModel, demForCommodDuals, capDuals, usageDual, edgeInterdict, jamPlaced, flowBalanceDuals
+    global transPlaced
     numISets = len(ISets)
     gurobiModel = gurobipy.Model("SingleLevelMIP_Cormican_ArcBased")
     try:
@@ -2476,6 +2513,8 @@ def create_SingleLevelMIP_Cormican_ArcBased(G, jammingGraph, commodities, ISets,
         if jamVarsType == 'jam-and-interdict-vars': # don't use this
             edgeInterdict = getEdgeInterdictVars(G, jammingGraph)
         jamPlaced = dict([(n, gurobiModel.addVar(vtype=gurobipy.GRB.BINARY, name="jamPlaced_l"+str(n))) for n in jammingGraph.nodes()])
+        transPlaced = dict([(n, gurobiModel.addVar(vtype=gurobipy.GRB.BINARY, name="transPlaced_l"+str(n))) for n in G.nodes()])
+        print "G.nodes()", G.nodes()
         print "jammingGraph.nodes()", jammingGraph.nodes()
         
         gurobiModel.update() # Integrate new variables
@@ -2510,13 +2549,17 @@ def create_BendersMasterProb_Cormican_ArcBased(G, jammingGraph, commodities, ISe
         # Create variables
         jamPlaced = dict([(n, gurobiModel.addVar(vtype=gurobipy.GRB.BINARY, name="jam_l"+str(n[0])+","+str(n[1]))) for n in jammingGraph.nodes()])
         #transPlaced = dict([(n, gurobiModel.addVar(vtype=gurobipy.GRB.BINARY, name="trans_"+str(n[0])+","+str(n[1]))) for n in connectivityGraph.nodes()])
+        
         approxVar = gurobiModel.addVar(0, vtype=gurobipy.GRB.CONTINUOUS, name="approxVar")
         gurobiModel.update() # Integrate new variables
         # Set objective
-        gurobiModel.setObjective(approxVar, gurobipy.GRB.MINIMIZE)
+        gurobiModel.setObjective(approxVar, gurobipy.GRB.MAXIMIZE)
+        #WBL edit 2/21 - max
         gurobiModel.update()
         #constraints       
         gurobiModel.addConstr(sum([jammingGraph.node[l]['cost'] * jamPlaced[l] for l in jammingGraph.nodes()]) <= instance.jamBudget, "interdictBudget")
+        #WBL edit 2/21 - needed here!!!
+        
         gurobiModel.update() # integrate objective and constraints
         #gurobiModel.setParam('OutputFlag', False ) #turn output off
         if(writeToFile):
@@ -2957,7 +3000,7 @@ def solveThroughputProblem_Pricing_CormicanArcBased(G, edgesJammed, interfModelT
     throughputWithoutPenalty = 0
     updates = 0
     bestDualBound = float('inf') #we are maximizing
-    if stabilize:
+    if stabilize: #so ignore
         setInitialSlackVarUBValues(G, instance.commodities, 0.01)
         setInitialSlackVarObjCoefValues(G, instance.commodities, 0.1)
         updateSlackStuffInModel(G, instance.commodities)
@@ -2970,8 +3013,9 @@ def solveThroughputProblem_Pricing_CormicanArcBased(G, edgesJammed, interfModelT
         prevDemForCommodDuals = demForCommodDuals.copy()
         throughput, capacityDuals, jammingDuals, usageDual, demForCommodDuals, throughputWithoutPenalty, slackVarValues, slackVarUBDuals, flowBalDuals = \
             solveThroughputProblem(G, count, interfModelType, suffix, stabilize)
-        nodeWeights = getWeightsForMaxIndSet(G, capacityDuals, jammingDuals, interfModelType)
+        nodeWeights = getWeightsForMaxIndSet(G, capacityDuals, jammingDuals, interfModelType) #does not consider jamming duals
         maxWeights, solnsSet = modifyAndSolve_maxWtIndepSet(instance.interferenceGraph, nodeWeights, interfModelType, count)
+        #WBL edit 2/22 don't think I need to change the function on the line above
         maxWeight = maxWeights[0]
         selected = solnsSet[0]
         print "throughput", throughput, "throughputWithoutPenalty", throughputWithoutPenalty
@@ -2983,7 +3027,8 @@ def solveThroughputProblem_Pricing_CormicanArcBased(G, edgesJammed, interfModelT
             if newISetAvailable:
                 ISets.append(selected)
                 addISetAsCol(G, ISets, selected, count, interfModelType, suffix, stabilize)
-            if stabilize:
+                #WBL edit 2/22 - only thing above that may need to change is lambda?
+            if stabilize: #so ignore
                 if not newISetAvailable:
                     updateSlackVarUBs(G, instance.commodities, updates)
                     updates += 1
@@ -3000,6 +3045,7 @@ def solveThroughputProblem_Pricing_CormicanArcBased(G, edgesJammed, interfModelT
         count += 1
     g_capacityDuals = capacityDuals
     flowVarSoln = dict([(commod, dict([(edge, flowVars[commod][edge].X) for edge in flowVars[commod].keys()])) for commod in instance.commodities.keys()])
+    #WBL edit 2/22 flow vars to replace jam vars
     isetUsageSoln = [iSetUsage[k].X for k in range(len(ISets))]
     print "throughput Without Penalty 2", throughputWithoutPenalty, "and throughput proper", throughput
     return flowVarSoln, isetUsageSoln, throughput, throughputWithoutPenalty
@@ -3364,6 +3410,7 @@ def runProtocolWithJamming_Benders():
         lb, ub, jamLocs = runBenders_Callback(instance.CGraph, instance.jamGraph, Paths, ISets, instance.maxNumHops, interfModelType, 0.0001)
     else:
         lb, ub, jamLocs = runBenders_Classic(instance.CGraph, instance.jamGraph, Paths, ISets, instance.maxNumHops, interfModelType, 0.0001)
+    #WBL 2/22 edit - after this just printing out values, except for ub & lb (where ub is what I want?)
     runTime = time.time() - startTime
     if 'callback' in algType:
         numNodesExplored = gurobiModel.NodeCount
