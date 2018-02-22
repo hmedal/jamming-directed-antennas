@@ -755,6 +755,7 @@ def runBenders_Classic(G, JammingGraph, Paths, ISets, max_hop_length, interfMode
         gurobiModel.Params.TimeLimit = timeRemaining
         gurobiModel.optimize()
         jamLocs = [n for n in jamPlaced.keys() if jamPlaced[n].X > 0.0]
+        
         numNodesExplored += gurobiModel.NodeCount
         lb = gurobiModel.objVal
         resetObjectiveForThroughputProblem(instance.CGraph, jamLocs, instance.commodities)
@@ -1947,8 +1948,11 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
             )
             for commodity in commodities.keys()])
         dummyVar = gurobiThroughputModel.addVar(0, obj = 0.0, name="dummyVar")
-        transPlaced = dict([(n, gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name="transPlaced_l"+str(n))) for n in G.nodes()])
-        print "transPlaced dict is", transPlaced
+        transPlaced = dict([(n, gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name="transPlaced_"+str(n))) for n in G.nodes()])
+        #jamLocs = [n for n in jamPlaced.keys() if jamPlaced[n].X > 0.0]
+        #jamPlaced = dict([(n, gurobiModel.addVar(vtype=gurobipy.GRB.BINARY, name="jamPlaced_l"+str(n))) for n in jammingGraph.nodes()])
+        #reference only
+        print "transPlaced dict is now", transPlaced
         #for edge in edgeTriples:
             #print edgeTriples, "edgeTriples"
             #print edge, "edge"
@@ -2027,7 +2031,7 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
                     capConstraints[edge] = gurobiThroughputModel.addConstr(sum([flowVars[commodity][edge] for commodity in commodities.keys()]) <= \
                                                     sum([iSetUsage[k] * int(edge in ISets[k]) * G.edge[edge[0]][edge[1]]['capacity'] for k in range(numISets)]), \
                                                     "capacity_"+str(edge[0])+","+str(edge[1]))
-                    print "capConstraints[edge] are", capConstraints[edge]
+                    #print "capConstraints[edge] are", capConstraints[edge]
                     #print "G.edge[edge[0]][edge[1]]['capacity']", G.edge[edge[0]][edge[1]]['capacity']
                     
                     #transPlacedConstr[edge] = gurobiThroughputModel.addConstr(sum([flowVars[commodity][edge] for commodity in commodities.keys()]) <= 
@@ -2044,21 +2048,20 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
                     #print "G.edge[edge[0]][edge[1]]['capacity']", G.edge[edge[0]][edge[1]]['capacity']
                     transPlacedConstr[edge[0]] = gurobiThroughputModel.addConstr(sum([flowVars[commodity][edge] for commodity in commodities.keys()]) <= \
                                                                                           (1000 * transPlaced[edge[0]]))
+                    print "transPlacedConstr[edge[0]]", transPlacedConstr[edge[0]]
                     #import sys
                     #sys.exit()
                     #WBL edit 2/21
-            
-                else:
-                    capConstraints[edge] = gurobiThroughputModel.addConstr(sum([flowVars[commodity][edge] for commodity in commodities.keys()]) -slackVars['-']['cap'][edge] + \
-                                                                                       slackVars['+']['cap'][edge] <= 
-                                       sum([iSetUsage[k] * int(edge in ISets[k]) * G.edge[edge[0]][edge[1]]['capacity'] for k in range(numISets)]), 
-                                           "capacity_"+str(edge[0])+","+str(edge[1]))
-            extrasum = 0
-            for edge in edgeTriples:
-                if int(transPlaced[edge[0]]) == 1:
-                    extrasum = extrasum + 1
-            print "extrasum is", extrasum
-            gurobiThroughputModel.addConstr((extrasum) <= 49)
+ 
+                    gurobiThroughputModel.update()
+                    print "transPlacedConstr[edge[0]], second showing", transPlacedConstr[edge[0]] #note: not in loop, so not each edge[0] val
+            #extrasum = 0
+            #for edge in edgeTriples:
+            #    if int(transPlaced[edge[0]]) > 0:
+            #        extrasum = extrasum + 1
+            #print "extrasum is", extrasum
+            budgetSum = sum([transPlaced[edge[0]] for edge in edgeTriples])
+            gurobiThroughputModel.addConstr(budgetSum <= 49)
             # Usage
             if numISets < 1:
                 if stabilize is False:
@@ -2144,8 +2147,8 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
             gurobiThroughputModel.write("/tmp/ThroughputInitial_Cormican_"+interfModelType + ".lp")
     except gurobipy.GurobiError as e:
         print "createThroughputModel_ContinuousJamming", str(e)
-    import sys
-    sys.exit()
+    #import sys
+    #sys.exit()
 
 def updateSlackStuffInModel(G, commodities):
     global slackUBConstr, slackVars
