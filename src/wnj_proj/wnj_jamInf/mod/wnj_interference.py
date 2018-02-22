@@ -740,10 +740,8 @@ def runBenders_Classic(G, JammingGraph, Paths, ISets, max_hop_length, interfMode
     createSubProbMods()
     if flowVarsType == 'arc-based' and modelType == 'cormican':
         create_BendersMasterProb_Cormican_ArcBased(G, instance.jamGraph, instance.commodities, ISets, interfModelType)
-        if includeParetoOptimalBendersCuts:
-            create_BendersMasterProb_LP_Cormican_ArcBased(G, instance.jamGraph, instance.commodities, ISets, interfModelType)
-    elif flowVarsType == 'arc-based' and modelType == 'regular':
-        raise Exception("configuration must be flowVarsType == 'arc-based' and modelType == 'cormican'")
+        
+    
     setVars_Benders_Classic(instance.modelType) #not important
     setParams(rel_gap_tol, lazy = False) #not important
     lb = 0
@@ -758,7 +756,7 @@ def runBenders_Classic(G, JammingGraph, Paths, ISets, max_hop_length, interfMode
         
         numNodesExplored += gurobiModel.NodeCount
         lb = gurobiModel.objVal
-        resetObjectiveForThroughputProblem(instance.CGraph, jamLocs, instance.commodities)
+        resetObjectiveForThroughputProblem(instance.CGraph, jamLocs, instance.commodities) #don't worry about jammers here, I think
         flow, isSetUsage, th, thNoPen = solveThroughputProblem_Pricing_CormicanArcBased(instance.CGraph, None, interfModelType, g_capacityDuals)
         ub = min(th, ub)
         addCuts_BendersClassic(gurobiModel, jamLocs, flow, th, thNoPen, jamPlaced, approxVar, iteration, ub)
@@ -817,18 +815,8 @@ def addCuts_BendersClassic(myModel, jamLocs, flowSoln, throughput, thNoPen, jamL
         bendersExpr = getConstraintExpressionForBendersCut_JamVarsOnly_ArcBased(flowVarSolnForBendersCut, throughputNoPenForBendersCut, jamLocVarsDict, approxVar)
         print "bendersExpr", bendersExpr
     myModel.addConstr(bendersExpr)
-    if includeParetoOptimalBendersCuts: #ignore
-        masterProbLP.addConstr(bendersExpr)
-    if includeKnapsack is True: #ignore
-        knapsackExpr = getConstraintExpressionFor_KI_Cut_JamVarsOnly_ArcBased(bestUB, flowVarSolnForBendersCut, throughputNoPenForBendersCut, jamLocVarsDict, approxVar)
-        #print "rhs", bestMIP_upperBound, throughputWithoutPenaltyForBendersCut, math.floor(bestMIP_upperBound - throughputWithoutPenaltyForBendersCut)
-        print "knapsackExpr", knapsackExpr
-        myModel.addConstr(knapsackExpr)
-        if includeParetoOptimalBendersCuts:
-            masterProbLP.addConstr(knapsackExpr)
-    if includeSuperValid is True: #ignore
-        print "smallestSubprobThroughput", smallestSubprobThroughput
-        addAndUpdateSupervalidCuts_Classic(myModel, bestUB, smallestSubprobThroughput, flowVarSolnForBendersCut, throughputNoPenForBendersCut, jamLocVarsDict)
+    
+     
         
 def setTrustRegionConstraint(myModel, jamLocs, trustRegionThreshold, iteration):
     global trustRegionConstr
@@ -1417,7 +1405,7 @@ def getConstraintExpressionForBendersCut_JamVarsOnly_ArcBased(flowVarValues, thr
         for e in flowVars[commod].keys():
             if flowVarValues[commod][e] > FUZZ:
                 secondSum += sum(flowVarValues[commod][e] * jamLocVarsDict[node] for node in jammersThatCanJamEdge[e])
-    #WBL edit 2/22 - where I set secondSum for Benders = items from my eq (19), duals of transPlaced vars
+    #WBL edit 2/22 for LATER- where I need to set secondSum for Benders = items from my eq (19), duals of transPlaced vars
     return throughput - secondSum <= approxVarArg
         
 def getConstraintExpressionForBendersCut_JamAndEdgeInterdictVars(JammingGraph, flowVarValues, interdictVarsDict, approxVarArg):
@@ -1454,7 +1442,7 @@ def create_MaxWtIndepSet_Model(ConflictGraph, nodeWeights, interfModelType):
             #for node in ConflictGraph.nodes()]#10d new constraint
             #[maxWtIndSetModel.addConstr(inSet[node] <= Z[node[1]], "inSet_Z_Constr_"+str(node)+","+str(node))
             # for node in ConflictGraph.nodes()]#10d new constraint
-        elif(interfModelType == 'simple-physical'):
+        elif(interfModelType == 'simple-physical'): #ignore
             M = 100000
             [maxWtIndSetModel.addConstr(sum([ConflictGraph.edge[node][otherNode]['weight'] * inSet[otherNode] for otherNode in ConflictGraph.nodes() 
                                         if otherNode != node]) <= 1.0 * inSet[node] + M*(1.0 - inSet[node]),
@@ -1936,6 +1924,7 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
     global gurobiThroughputModel, iSetUsage, flowBalanceConstrs, capConstraints, usageConstr, jamConstrs, flowVars, commodDemConstr, returnFlow, slackVars, slackUBConstr, slackVariableMultipliers, slackVarUBs
     global transPlacedConstr
     global transPlaced
+    #global transPlacedDuals
     #WBL edit - additional of global variable for trans placed constraints
     numISets = len(ISets)
     gurobiThroughputModel = gurobipy.Model("createThroughputModel_ContinuousJamming_Cormican")
@@ -1954,27 +1943,7 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
         #reference only
         print "transPlaced dict is now", transPlaced
         #for edge in edgeTriples:
-            #print edgeTriples, "edgeTriples"
-            #print edge, "edge"
-            #print "testing value"
-            #transPlaced = []
-            #transPlaced = dict([
-            #(edge[0], gurobiThroughputModel.addVar(0, name="flow_"+str(edge[0])+","+str(edge[1]))) for edge in edgeTriples])
-            #i = 200
             
-            #transPlacedVars = dict([
-            #(edge[0], gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name="at_"+str(edge[0])))])
-            
-            #thexcoornode = instance.CGraph.node[edge[1]]['coor'][0]
-            #theycoornode = instance.CGraph.node[edge[1]]['coor'][1]
-            #transPlaced.append(gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name = "trans_"+str(edge[0])))
-            #transPlaced[edge[0]] = gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name = "trans_"+str(edge[0]))
-            #if transPlaced[edge[1]] != transPlaced[edge[0]]:
-            #transPlaced.append(gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name = "trans_"+str(edge[1])))
-            #    transPlaced[edge[1]] = gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name = "trans_"+str(edge[1]))
-            #if edge[1] not in transPlaced
-                #extra = dict([(edge[1], gurobiThroughputModel.addVar(0, name = "trans_"+str(edge[1])+str(edge[0])))]) 
-                #transPlaced.update(extra)
             
         #WBL edit - transPlaced var creation
         #if 
@@ -3018,10 +2987,10 @@ def solveThroughputProblem_Pricing_CormicanArcBased(G, edgesJammed, interfModelT
             solveThroughputProblem(G, count, interfModelType, suffix, stabilize)
         nodeWeights = getWeightsForMaxIndSet(G, capacityDuals, jammingDuals, interfModelType) #does not consider jamming duals
         maxWeights, solnsSet = modifyAndSolve_maxWtIndepSet(instance.interferenceGraph, nodeWeights, interfModelType, count)
-        #WBL edit 2/22 don't think I need to change the function on the line above
+        #WBL edit 2/22 don't think I need to change the function on the line above !!!
         maxWeight = maxWeights[0]
         selected = solnsSet[0]
-        print "throughput", throughput, "throughputWithoutPenalty", throughputWithoutPenalty
+        print "throughput", throughput#, "throughputWithoutPenalty", throughputWithoutPenalty #don't think I need val "w/o penalty": anymore
         print "maxWt", maxWeight, "usageDual", usageDual #, selected
         newISetAvailable = ((maxWeight - usageDual) > FUZZ)
         if((newISetAvailable is False) and slackVarsAreZero(slackVarValues, G, instance.commodities, stabilize)):
@@ -3031,26 +3000,13 @@ def solveThroughputProblem_Pricing_CormicanArcBased(G, edgesJammed, interfModelT
                 ISets.append(selected)
                 addISetAsCol(G, ISets, selected, count, interfModelType, suffix, stabilize)
                 #WBL edit 2/22 - only thing above that may need to change is lambda?
-            if stabilize: #so ignore
-                if not newISetAvailable:
-                    updateSlackVarUBs(G, instance.commodities, updates)
-                    updates += 1
-                dualBound = getDualBound(flowBalDuals, capacityDuals, usageDual, demForCommodDuals, throughput, maxWeight)
-                isDualSolnBestSoFar = dualSolutionIsBestSoFar(dualBound, bestDualBound) # is dual solution the best known estimate of the optimal dual solution?
-                bestDualBound =  min(dualBound, bestDualBound)
-                print "best dual bound: ", bestDualBound, isDualSolnBestSoFar
-                if isDualSolnBestSoFar:
-                    updateSlackVarObjCoefsAroundDualSolutionAndKeepRange(G, instance.commodities, flowBalDuals, capacityDuals, jammingDuals, usageDual, demForCommodDuals)
-                else:
-                    updateSlackVarObjCoefsAroundPrevDualSolutionAndIncreaseRange(G, instance.commodities, prevFlowBalDuals, prevCapacityDuals, prevJammingDuals, prevUsageDual, \
-                                                                                 prevDemForCommodDuals, slackVarValues, 2.0)
-                updateSlackStuffInModel(G, instance.commodities)
+            
         count += 1
     g_capacityDuals = capacityDuals
     flowVarSoln = dict([(commod, dict([(edge, flowVars[commod][edge].X) for edge in flowVars[commod].keys()])) for commod in instance.commodities.keys()])
     #WBL edit 2/22 flow vars to replace jam vars
     isetUsageSoln = [iSetUsage[k].X for k in range(len(ISets))]
-    print "throughput Without Penalty 2", throughputWithoutPenalty, "and throughput proper", throughput
+    print "outdated throughput Without Penalty", throughputWithoutPenalty, "and throughput proper, the actual overall throughput", throughput
     return flowVarSoln, isetUsageSoln, throughput, throughputWithoutPenalty
 
 def OLD_getCorePoint_Rounded():
@@ -3162,12 +3118,14 @@ def getSlackVarValues(G, commodities):
     return slackVarsValues
 
 def solveThroughputProblem(G, iteration, interfModelType, suffix = '', stabilize = False):
+    global transPlacedDuals
     try:
+        transPlacedDuals = {}
         if(writeToFile):
             gurobiThroughputModel.write("/tmp/ThroughputProblem_"+ str(suffix) + "_" + str(iteration)+".lp")
         gurobiThroughputModel.optimize()
-        throughputWithPenalty = gurobiThroughputModel.objVal
-        throughputWithoutPenalty = sum([returnFlow[commod].X for commod in instance.commodities.keys()])
+        throughputWithPenalty = gurobiThroughputModel.objVal #actually has no obj func penalty at this point; just throughput I want
+        throughputWithoutPenalty = sum([returnFlow[commod].X for commod in instance.commodities.keys()]) #not needed anymore
         print "throughputWithPenalty 3", throughputWithPenalty, "and throughputWithoutPenalty"
         
         flowBalDuals = {}
@@ -3175,6 +3133,9 @@ def solveThroughputProblem(G, iteration, interfModelType, suffix = '', stabilize
             flowBalDuals[commod] = {}
             for node in G.nodes():
                 flowBalDuals[commod][node] = flowBalanceConstrs[commod][node].Pi
+        for edge in edgeTriples:
+            transPlacedDuals[edge[0]] =  transPlacedConstr[edge[0]].Pi
+        print "transPlacedDuals are assigned values of"
                                                                                    
         capacityDuals = dict([(edge, capConstraints[edge].Pi) for edge in edgeTriples])
 
