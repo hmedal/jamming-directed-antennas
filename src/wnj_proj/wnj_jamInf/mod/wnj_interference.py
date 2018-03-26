@@ -616,7 +616,7 @@ def getInitialNodeWeights():
     initialNodeWeights = {}
     for edgeTriple in edgeTriples:
         attrIndex = getAttrIndex(edgeTriple)
-        initialNodeWeights[edgeTriple] = instance.CGraph.edge[edgeTriple[0]][edgeTriple[1]][attrIndex]['capacity']
+        initialNodeWeights[edgeTriple] = 1000#instance.CGraph.edge[edgeTriple[0]][edgeTriple[1]][attrIndex]['capacity']
     return initialNodeWeights
 
 def setVars(modelType, useVirtualEdges = True):
@@ -1446,7 +1446,7 @@ def create_MaxWtIndepSet_Model(ConflictGraph, nodeWeights, interfModelType):
         print "inSet", inSet
         maxWtIndSetModel.update() # Integrate new variables
         # Set objective - Added NEW for total current
-        maxWtIndSetModel.setObjective(sum([nodeWeights[node] * inSet[node] for node in ConflictGraph.nodes()]) - sum([instance.CGraph.node[nodeZ[1]]['tcurr']*Z[nodeZ[1]] for nodeZ in ConflictGraph.nodes()]), gurobipy.GRB.MAXIMIZE)
+        maxWtIndSetModel.setObjective(sum([nodeWeights[node] * inSet[node] for node in ConflictGraph.nodes()]))# - sum([instance.CGraph.node[nodeZ[1]]['tcurr']*Z[nodeZ[1]] for nodeZ in ConflictGraph.nodes()]), gurobipy.GRB.MAXIMIZE)
         # adjacency constraints
         if(interfModelType == 'simple-protocol' or interfModelType == '802.11-MAC-protocol'):
             [maxWtIndSetModel.addConstr( inSet[node] + inSet[adjNode] <= 1, "adjConstr_"+str(node)+","+str(adjNode))
@@ -1455,17 +1455,17 @@ def create_MaxWtIndepSet_Model(ConflictGraph, nodeWeights, interfModelType):
             #for node in ConflictGraph.nodes()]#10d new constraint
             #[maxWtIndSetModel.addConstr(inSet[node] <= Z[node[1]], "inSet_Z_Constr_"+str(node)+","+str(node))
             # for node in ConflictGraph.nodes()]#10d new constraint
-        elif(interfModelType == 'simple-physical'): #ignore
-            M = 100000
-            [maxWtIndSetModel.addConstr(sum([ConflictGraph.edge[node][otherNode]['weight'] * inSet[otherNode] for otherNode in ConflictGraph.nodes() 
-                                        if otherNode != node]) <= 1.0 * inSet[node] + M*(1.0 - inSet[node]),
-                                    "snr-constr_"+str(node))
-                                        for node in ConflictGraph.nodes()]
+        #elif(interfModelType == 'simple-physical'): #ignore
+            #M = 100000
+            #[maxWtIndSetModel.addConstr(sum([ConflictGraph.edge[node][otherNode]['weight'] * inSet[otherNode] for otherNode in ConflictGraph.nodes() 
+            #                            if otherNode != node]) <= 1.0 * inSet[node] + M*(1.0 - inSet[node]),
+            #                        "snr-constr_"+str(node))
+            #                            for node in ConflictGraph.nodes()]
         maxWtIndSetModel.update() # integrate objective and constraints
         maxWtIndSetModel.setParam('OutputFlag', False ) #turn output off
         #maxWtIndSetModel.setParam('CliqueCuts', 2) #turn output off
-        if(writeToFile):
-            maxWtIndSetModel.write("/tmp/maxWtIndepSet_initial.lp")
+        #if(writeToFile):
+            #maxWtIndSetModel.write("/tmp/maxWtIndepSet_initial.lp")
     except gurobipy.GurobiError as e:
         print "maxWt error: ", str(e)
     #maxWtIndSetModel.setObjective((sum([nodeWeights[node] * inSet[node] for node in ConflictGraph.nodes()]) - sum([instance.CGraph.node[nodeZ[1]]['tcurr']*Z[nodeZ[1]] for nodeZ in ConflictGraph.nodes()])), gurobipy.GRB.MAXIMIZE)
@@ -1939,7 +1939,9 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
     global transPlaced
     #global transPlacedDuals
     #WBL edit - additional of global variable for trans placed constraints
+    print "ISets are", ISets
     numISets = len(ISets)
+    print "numISets", numISets
     gurobiThroughputModel = gurobipy.Model("createThroughputModel_ContinuousJamming_Cormican")
     try:
         ## CREATE VARIABLES
@@ -1949,6 +1951,7 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
             dict([(edge, gurobiThroughputModel.addVar(0, name="flow_"+str(edge[0])+","+str(edge[1]))) for edge in edgeTriples])
             )
             for commodity in commodities.keys()])
+        print "flowVars are", flowVars
         dummyVar = gurobiThroughputModel.addVar(0, obj = 0.0, name="dummyVar")
         transPlaced = dict([(n, gurobiThroughputModel.addVar(vtype=gurobipy.GRB.BINARY, name="transPlaced_"+str(n))) for n in G.nodes()])
         #jamLocs = [n for n in jamPlaced.keys() if jamPlaced[n].X > 0.0]
@@ -1966,11 +1969,13 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
         
         # Other
         returnFlow = dict([(commod, gurobiThroughputModel.addVar(0, name="returnFlow_"+str(commod))) for commod in commodities.keys()])
+        print "returnFlow is", returnFlow
         iSetUsage = [gurobiThroughputModel.addVar(0, 1, name="lamda_"+str(k)) for k in range(numISets)]
+        print "iSetUsage is", iSetUsage
         gurobiThroughputModel.update() # Integrate new variables
         
         ## SET OBJECTIVE
-        regularTerm = getObjective_ThroughputModel_Cormican(G, jamLocs, commodities)
+        regularTerm = sum([returnFlow[commod] for commod in commodities.keys()])#getObjective_ThroughputModel_Cormican(G, jamLocs, commodities)
         #print "regularTerm", regularTerm
         if stabilize:
             if slackVariableMultipliers is None:
@@ -2000,13 +2005,15 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
                     sumIn += flowVars[commod][edgeTriple]
                 if stabilize is False:
                     flowBalanceConstrs[commod][node] = gurobiThroughputModel.addConstr(indicator + sumOut == sumIn, "flowBal_"+str(node))
-                else:
-                    flowBalanceConstrs[commod][node] = gurobiThroughputModel.addConstr(indicator + sumOut -slackVars['-']['flowBal'][commod][node] + \
-                                                                                   slackVars['+']['flowBal'][commod][node] == sumIn, "flowBal_"+str(node))
+                #else:
+                    #flowBalanceConstrs[commod][node] = gurobiThroughputModel.addConstr(indicator + sumOut -slackVars['-']['flowBal'][commod][node] + \
+                    #                                                               slackVars['+']['flowBal'][commod][node] == sumIn, "flowBal_"+str(node))
         if((interfModelType == 'simple-protocol') or (interfModelType == '802.11-MAC-protocol')):
             # Capacity
             capConstraints = {}
             transPlacedConstr = {}
+            #for edge in edgeTriples:
+                #transPlacedConstr[edge] = {}
             #WBL edit 2/21
             for edge in edgeTriples:
                 if stabilize is False:
@@ -2048,13 +2055,13 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
             if numISets < 1:
                 if stabilize is False:
                     usageConstr = gurobiThroughputModel.addConstr(dummyVar <= 1, "iSetUsage")
-                else:
-                    usageConstr = gurobiThroughputModel.addConstr(dummyVar - slackVars['-']['usage'] + slackVars['+']['usage'] <= 1, "iSetUsage")
+                #else:
+                    #usageConstr = gurobiThroughputModel.addConstr(dummyVar - slackVars['-']['usage'] + slackVars['+']['usage'] <= 1, "iSetUsage")
             else:
                 if stabilize is False:
                     usageConstr = gurobiThroughputModel.addConstr(sum([iSetUsage[k] for k in range(numISets)]) <= 1, "iSetUsage")
-                else:
-                    usageConstr = gurobiThroughputModel.addConstr(sum([iSetUsage[k] for k in range(numISets)]) -slackVars['-']['usage'] + slackVars['+']['usage'] <= 1, "iSetUsage")
+                #else:
+                    #usageConstr = gurobiThroughputModel.addConstr(sum([iSetUsage[k] for k in range(numISets)]) -slackVars['-']['usage'] + slackVars['+']['usage'] <= 1, "iSetUsage")
         #WBL edit - addition of trans placed constraints below
             #transPlacedConstr = {}
             
@@ -2080,53 +2087,58 @@ def createThroughputModel_ContinuousJamming_Cormican(G, commodities, ISets, jamL
         
         #WBL edit - adding trans placed constraints
         
-        elif(interfModelType == 'none'):
-            capConstraints = {}
-            for edge in edgeTriples:
-                name = "capacity_"+str(edge[0])+","+str(edge[1])
-                if stabilize is False:
-                    capConstraints[edge] = gurobiThroughputModel.addConstr(sum([flowVars[commodity][edge] for commodity in commodities.keys()]) <= \
-                                                                           G.edge[edge[0]][edge[1]][0]['capacity'], name)
-                else:
-                    capConstraints[edge] = gurobiThroughputModel.addConstr(sum([flowVars[commodity][edge] for commodity in commodities.keys()]) -slackVars['-']['cap'][edge] + \
-                                                                                   slackVars['+']['cap'][edge] <= G.edge[edge[0]][edge[1]][0]['capacity'], name)
+        #elif(interfModelType == 'none'):
+            #capConstraints = {}
+            #for edge in edgeTriples:
+                #name = "capacity_"+str(edge[0])+","+str(edge[1])
+                #if stabilize is False:
+                    #capConstraints[edge] = gurobiThroughputModel.addConstr(sum([flowVars[commodity][edge] for commodity in commodities.keys()]) <= \
+                    #                                                       G.edge[edge[0]][edge[1]][0]['capacity'], name)
+                #else:
+                    #capConstraints[edge] = gurobiThroughputModel.addConstr(sum([flowVars[commodity][edge] for commodity in commodities.keys()]) -slackVars['-']['cap'][edge] + \
+                    #                                                               slackVars['+']['cap'][edge] <= G.edge[edge[0]][edge[1]][0]['capacity'], name)
         
         # Demand
         commodDemConstr = {}
         for commod in commodities.keys():
             if stabilize is False:
                 commodDemConstr[commod] = gurobiThroughputModel.addConstr(returnFlow[commod] <= commodities[commod]['demand'], "demandForCommod_"+str(commod))
-            else:
-                commodDemConstr[commod] = gurobiThroughputModel.addConstr(returnFlow[commod] -slackVars['-']['commodDemand'][commod] + \
-                                                                                   slackVars['+']['commodDemand'][commod] <= commodities[commod]['demand'], "demandForCommod_"+str(commod))
+                print returnFlow[commod], "is the returnFlow[commod] value"
+                print "commodities[commod]['demand'] value is as follows:", commodities[commod]['demand']
+            #else:
+                #commodDemConstr[commod] = gurobiThroughputModel.addConstr(returnFlow[commod] -slackVars['-']['commodDemand'][commod] + \
+                #                                                                   slackVars['+']['commodDemand'][commod] <= commodities[commod]['demand'], "demandForCommod_"+str(commod))
             
         # Slack var upper bound
-        if stabilize is True:
-            if slackVarUBs is None:
-                slackVarUBs = createSlackVariableUBs(G, commodities, 0.0)
-            slackUBConstr = {}
-            for sign in ['-', '+']:
-                slackUBConstr[sign] = {}
-                constrName = 'flowBal'
-                slackUBConstr[sign][constrName] = {}
-                for commod in commodities.keys():
-                    slackUBConstr[sign][constrName][commod] = {}
-                    for node in G.nodes():
-                        slackUBConstr[sign][constrName][commod][node] = gurobiThroughputModel.addConstr(slackVars[sign][constrName][commod][node] <= slackVarUBs[sign][constrName][commod][node], "slackUB_"+sign+"_"+constrName+"_"+str(commod)+"_"+str(node))
-                constrName = 'cap'
-                slackUBConstr[sign][constrName] = {}
-                for edge in edgeTriples:
-                    slackUBConstr[sign][constrName][edge] = gurobiThroughputModel.addConstr(slackVars[sign][constrName][edge] <= slackVarUBs[sign][constrName][edge], "slackUB_"+sign+"_"+constrName+"_"+str(edge))
-                constrName = 'commodDemand'
-                slackUBConstr[sign][constrName] = {}
-                for commod in commodities.keys():
-                    slackUBConstr[sign][constrName][commod] = gurobiThroughputModel.addConstr(slackVars[sign][constrName][commod] <= slackVarUBs[sign][constrName][commod], "slackUB_"+sign+"_"+constrName+"_"+str(commod))
-                constrName = 'usage'
-                slackUBConstr[sign][constrName] = gurobiThroughputModel.addConstr(slackVars[sign][constrName] <= slackVarUBs[sign][constrName], "slackUB_"+sign+"_"+constrName)
+        #if stabilize is True:
+            #if slackVarUBs is None:
+                #slackVarUBs = createSlackVariableUBs(G, commodities, 0.0)
+            #slackUBConstr = {}
+            #for sign in ['-', '+']:
+                #slackUBConstr[sign] = {}
+                #constrName = 'flowBal'
+                #slackUBConstr[sign][constrName] = {}
+                #for commod in commodities.keys():
+                #    slackUBConstr[sign][constrName][commod] = {}
+                #    for node in G.nodes():
+                #        slackUBConstr[sign][constrName][commod][node] = gurobiThroughputModel.addConstr(slackVars[sign][constrName][commod][node] <= slackVarUBs[sign][constrName][commod][node], "slackUB_"+sign+"_"+constrName+"_"+str(commod)+"_"+str(node))
+                #constrName = 'cap'
+                #slackUBConstr[sign][constrName] = {}
+                #for edge in edgeTriples:
+                #    slackUBConstr[sign][constrName][edge] = gurobiThroughputModel.addConstr(slackVars[sign][constrName][edge] <= slackVarUBs[sign][constrName][edge], "slackUB_"+sign+"_"+constrName+"_"+str(edge))
+                #constrName = 'commodDemand'
+                #slackUBConstr[sign][constrName] = {}
+                #for commod in commodities.keys():
+                #    slackUBConstr[sign][constrName][commod] = gurobiThroughputModel.addConstr(slackVars[sign][constrName][commod] <= slackVarUBs[sign][constrName][commod], "slackUB_"+sign+"_"+constrName+"_"+str(commod))
+                #constrName = 'usage'
+                #slackUBConstr[sign][constrName] = gurobiThroughputModel.addConstr(slackVars[sign][constrName] <= slackVarUBs[sign][constrName], "slackUB_"+sign+"_"+constrName)
         gurobiThroughputModel.update() # integrate objective and constraints
         gurobiThroughputModel.setParam('OutputFlag', False ) #turn output off
         if(writeToFile):
             gurobiThroughputModel.write("/tmp/ThroughputInitial_Cormican_"+interfModelType + ".lp")
+        print "These are lb & ub values:"
+        gurobiThroughputModel.printAttr(['lb', 'ub'])
+        
     except gurobipy.GurobiError as e:
         print "createThroughputModel_ContinuousJamming", str(e)
     gurobiThroughputModel.optimize()
