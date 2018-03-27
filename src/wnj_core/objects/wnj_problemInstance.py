@@ -290,7 +290,7 @@ class Instance(object):
             if (edge[0] != edge[1]): #and edgeInfo['dist'] <= (G.node[edge[0]]['commRange'] + FUZZ):
                 #return True
             
-                with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_new_high.csv', 'rU') as f:
+                with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_med.csv', 'rU') as f:
                     reader1 = csv.reader(f)
                     mycsvlist1 = list(reader1)
                     degreenumber = [x[0] for x in mycsvlist1]
@@ -450,7 +450,7 @@ class Instance(object):
         global transmissiondistance
         transmissiondistance = 0
         
-        with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_new_high.csv', 'rU') as f:
+        with open('/Users/wbl62/Desktop/directed-code/Transmitter_directed_med.csv', 'rU') as f:
             reader1 = csv.reader(f)
             mycsvlist1 = list(reader1)
             degreenumber = [x[0] for x in mycsvlist1]
